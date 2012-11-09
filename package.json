@@ -1,0 +1,19 @@
+{
+  "name": "nko3-waterloo-napoleons",
+  "version": "0.0.0",
+  "description": "Waterloo Napoleons",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nko3/waterloo-napoleons.git"
+  },
+  "dependencies": {
+  },
+  "engines": {
+    "node": "0.8.x"
+  },
+  "subdomain": "waterloo-napoleons.nko3"
+}
