@@ -10,33 +10,29 @@ block content
           | dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
           | ut fermentum massa justo zsit namet risus  amet.
     .row-fluid
-      .span4.offset4
+      .span4.offset4.singup
         form(method='POST',action='/')
         .input-append
           input(type='email',placeholder='Your Email',name='email',required,value='a@b.com')
           button.btn.btn-success(type='submit') Sign up
 
 
-  div.container-narrow.box
-    div.row-fluid.box
-      div.span6
-        div.box2
-          img(src="/images/notification.png").feed
-          h4 Notification
-          p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
-
-        div.box2
-          img(src="/images/status.png").feed
+  div.container-narrow
+    div.row-fluid
+      div.span6.box
+        div
+          img(src="/images/status.png").box-img
           h4 Status Page
           p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
 
-      div.span6
-        div.box2
-          img(src="/images/feed.jpg").feed
+      div.span6.box
+        div
+          img(src="/images/feed.jpg").box-img
           h4 Feed
           p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
 
-        div.box2
-          img(src="/images/mobile.jpg").feed
-          h4 Mobile
+      div.span6.box
+        div
+          img(src="/images/notification.png").box-img
+          h4 Notification
           p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
