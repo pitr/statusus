@@ -13,7 +13,7 @@ block content
               if message.p('resolved')
                 .label.label-success ok
               else
-                .label.label-important not ok
+                .label.label-warning not ok
               = message.p('body')
         form(method='POST',action='/feeds/#{feed.id}').form-horizontal
           textarea(name='body',rows=3,placeholder='Message (e.g. We are investigating problems with DNS)')
@@ -23,4 +23,4 @@ block content
 
     li
       form(method='POST',action='/feeds')
-        input(type='text',name='name',placeholder='New feed')
+        input(type='text',name='name',placeholder='New feed',required)
