@@ -2,15 +2,20 @@
   "name": "nko3-waterloo-napoleons",
   "version": "0.0.0",
   "description": "Waterloo Napoleons",
-  "main": "server.js",
+  "main": "server.coffee",
   "scripts": {
-    "start": "node server.js"
+    "start": "node_modules/.bin/coffee server.coffee"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:nko3/waterloo-napoleons.git"
   },
   "dependencies": {
+    "express": "*",
+    "coffee-script": "*",
+    "jade": "*",
+    "less-middleware": "*",
+    "redis": "*"
   },
   "engines": {
     "node": "0.8.x"
