@@ -91,6 +91,7 @@ app.configure 'development', ->
 app.get '/', (req, res) -> res.render 'index', title: 'Statusus'
 app.get '/pricing', (req, res) -> res.render 'pricing', title: 'Statusus'
 app.get '/about', (req, res) -> res.render 'about', title: 'Statusus'
+app.get '/login', (req, res) -> res.render 'login', title: 'Statusus'
 
 app.get '/feeds', (req, res, next) ->
   Feed.find (err, feed_ids) ->

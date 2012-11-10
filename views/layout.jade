@@ -8,17 +8,23 @@ html
 
     script(src='/javascript/bootstrap.js')
     script(src='/javascript/backbone.js')
-
   body
-    .top.container-fluid.container
-      ul.nav.nav-pills.pull-right.menu
-        li.active
-          a(href='/') Home
-        li
-          a(href='/pricing') Pricing
-        li
-          a(href='/about') About Us
 
-      h3#logo Statusus
+    header
+      div.top.container-narrow.container
+        ul.nav.nav-pills.pull-right.menu
+          li.active
+            a(href='/') Home
+          li
+            a(href='/pricing') Pricing
+          li
+            a(href='/about') About Us
 
-    block content
+        h3#logo Statusus
+
+    section.content
+      block content
+
+    footer
+      div.footer
+        p.container-narrow.container @ Statusus - All rights reserved.

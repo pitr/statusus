@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  .container-fluid
+  div
     .row-fluid
       h1#main-marking-text Don't piss your client off!
       .container-narrow
@@ -16,26 +16,27 @@ block content
           input(type='email',placeholder='Your Email',name='email',required,value='a@b.com')
           button.btn.btn-success(type='submit') Sign up
 
-  .container-narrow.box
-    .row-fluid.box
-      .span6
-        div
+
+  div.container-narrow.box
+    div.row-fluid.box
+      div.span6
+        div.box2
           img(src="/images/notification.png").feed
           h4 Notification
           p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
 
-        div
+        div.box2
           img(src="/images/status.png").feed
           h4 Status Page
           p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
 
-      .span6
-        div
+      div.span6
+        div.box2
           img(src="/images/feed.jpg").feed
           h4 Feed
           p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
 
-        div
+        div.box2
           img(src="/images/mobile.jpg").feed
           h4 Mobile
           p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
