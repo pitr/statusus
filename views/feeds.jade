@@ -4,7 +4,23 @@ block content
   h1 Feeds
   a(href='/') logout
   ul
-    li Feed 1
-    li Feed 2
-    li Feed 3
+    for feed in feeds
+      li
+        h2= feed.p('name')
+        ol
+          for message in feed.messages
+            li
+              if message.p('resolved')
+                .label.label-success ok
+              else
+                .label.label-important not ok
+              = message.p('body')
+        form(method='POST',action='/feeds/#{feed.id}').form-horizontal
+          textarea(name='body',rows=3,placeholder='Message (e.g. We are investigating problems with DNS)')
+          br
+          button.btn.btn-success(name='status',value='resolved',type='submit') Resolve
+          button.btn.btn-danger(name='status',value='error',type='submit') Escalate
 
+    li
+      form(method='POST',action='/feeds')
+        input(type='text',name='name',placeholder='New feed')
