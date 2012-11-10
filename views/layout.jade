@@ -8,19 +8,17 @@ html
 
     script(src='/javascript/bootstrap.js')
     script(src='/javascript/backbone.js')
+
   body
+    .top.container-fluid.container
+      ul.nav.nav-pills.pull-right.menu
+        li.active
+          a(href='/') Home
+        li
+          a(href='/pricing') Pricing
+        li
+          a(href='/about') About Us
 
-      div.top.container-narrow.container
-        ul.nav.nav-pills.pull-right.menu
-          li.active
-            a(href='/') Home
-          li
-            a(href='/feeds') Log in
-          li
-            a(href='/pricing') Pricing
-          li
-            a(href='/about') About Us
+      h3#logo Statusus
 
-        h3#logo Statusus
-
-      block content
+    block content
