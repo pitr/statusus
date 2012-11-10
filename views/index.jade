@@ -1,15 +1,24 @@
 extends layout
 
 block content
-  div
-    h1#main-marking-text Don't piss your client off!
-    div.container-narrow
-      p#main-text Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo zsit namet risus  amet.
-  button.btn.btn-success.sign-up Sign up
+  .container-fluid
+    .row-fluid
+      h1#main-marking-text Don't piss your client off!
+      .container-narrow
+        p#main-text
+          | Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce
+          | dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+          | ut fermentum massa justo zsit namet risus  amet.
+    .row-fluid
+      .span4.offset4
+        form(method='POST',action='/')
+        .input-append
+          input(type='email',placeholder='Your Email',name='email',required,value='a@b.com')
+          button.btn.btn-success(type='submit') Sign up
 
-  div.container-narrow.box
-    div.row-fluid.box
-      div.span6
+  .container-narrow.box
+    .row-fluid.box
+      .span6
         div
           img(src="/images/notification.png").feed
           h4 Notification
@@ -20,7 +29,7 @@ block content
           h4 Status Page
           p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
 
-      div.span6
+      .span6
         div
           img(src="/images/feed.jpg").feed
           h4 Feed
