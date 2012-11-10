@@ -16,7 +16,8 @@
     "jade": "*",
     "less-middleware": "*",
     "redis": "*",
-    "nohm": "*"
+    "nohm": "*",
+    "node-uuid": "*"
   },
   "engines": {
     "node": "0.8.x"
