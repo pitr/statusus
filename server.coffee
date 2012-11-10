@@ -15,13 +15,10 @@ User = Nohm.model 'User',
   # has many feeds
   idGenerator: 'increment'
   properties:
-    name:
-      type: 'string'
-      unique: true
-      validations: ['notEmpty']
     email:
       type: 'string'
       unique: true
+      index: true
       validations: ['email']
     visits:
       type: (value, key, old) -> old + value
