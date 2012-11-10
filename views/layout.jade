@@ -9,4 +9,17 @@ html
     script(src='/javascript/bootstrap.js')
     script(src='/javascript/backbone.js')
   body
-    block content
+      div.top.container-narrow.container
+        ul.nav.nav-pills.pull-right.menu
+          li.active
+            a(href='/') Home
+          li
+            a(href='/login') Log in
+          li
+            a(href='/pricing') Pricing
+          li
+            a(href='/about') About
+
+        h3#logo Statusus
+
+      block content
