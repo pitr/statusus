@@ -115,7 +115,7 @@ app.configure ->
   app.use express.methodOverride()
   app.use express.cookieParser('mysecrethere')
   app.use express.session()
-  app.use require('less-middleware')({ src: __dirname + '/public' })
+  app.use require('less-middleware')(src: "#{__dirname}/less", dest: "#{__dirname}/public/stylesheets", prefix: '/stylesheets')
   app.use express.static(path.join(__dirname, 'public'))
   app.use (req, res, next) ->
     # try to authenticate, ignore failure silently
