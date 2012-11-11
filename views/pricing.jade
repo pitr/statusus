@@ -1,5 +1,23 @@
 extends layout
 
 block content
-  h1 Pricing
-  h2 We are free
+  .container
+    .row
+      a(href='/')
+        .span4.offset1.price.well
+          h1 $1
+          ul.unstyled.pricing
+            li Unlimited feeds
+            li 1 Dashboard
+            li Unlimited Messages
+            li Email support
+          button.btn.btn-success.btn-large Choose
+      a(href='/')
+        .span3.offset2.price.well.push-down
+          h2 Free
+          ul.unstyled.pricing
+            li 1 feed
+            li 1 Dashboard
+            li Unlimited messages
+            li Email support
+          button.btn.btn-success.btn-large Choose

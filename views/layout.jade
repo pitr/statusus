@@ -1,35 +1,30 @@
 doctype 5
-html
+html(lang='en')
   head
     title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.css')
+    link(rel='stylesheet', href='/stylesheets/responsive.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
 
-    script(src='/javascript/bootstrap.js')
-    script(src='/javascript/backbone.js')
   body
-
-    header
-      div.container-narrow.container
-        ul.nav.nav-pills.pull-right.menu
-          li.active
-            a(href='/') Home
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          a(class="brand", href="/") Statusus
+          ul.nav
+            li
+              a(href='/pricing') Pricing
+            li
+              a(href='/about') About Us
+            li
+              a.voting
+                iframe(src="http://nodeknockout.com/iframe/waterloo-napoleons",frameborder=0,scrolling='no',allowtransparency='false',width=115,height=25)
           if user
-            li
-              a(href='/feeds') My Feeds
-            li
-              a(href='/logout') Logout
-          li
-            a(href='/pricing') Pricing
-          li
-            a(href='/about') About Us
+            ul.nav.pull-right
+              li
+                a(href='/feeds') My Feeds
+              li
+                a(href='/logout') Logout
 
-        h1#logo Statusus
-
-    section.content
-      block content
-
-    footer
-      div.footer
-        p.container-narrow.container @ Statusus - All rights reserved.
+    block content

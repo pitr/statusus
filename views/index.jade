@@ -1,41 +1,38 @@
 extends layout
 
 block content
-  div
-    .row-fluid
-      h2#main-marking-text Don't piss your client off!
+  .container
+    .hero-unit
+      h1 Don't piss your client off!
       .container-narrow
         p#main-text
           | Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce
           | dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
           | ut fermentum massa justo zsit namet risus  amet.
     .row-fluid
-      .span4.offset4.singup
+      .span4.offset4.signup
         if user
-          a(href='/feeds').btn.btn-large.btn-success Continue
+          a(href='/feeds').btn.btn-large.btn-success Continue to feeds
         else
           form(method='POST',action='/')
             .input-append
               input(type='email',placeholder='Your Email',name='email',required,value='a@b.com')
               button.btn.btn-success(type='submit') Sign up
 
-
-  div.container-narrow
-    div.row-fluid
-      div.span6.box
-        div
-          img(src="/images/status.png").box-img
-          h4 Status Page
-          p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
-
-      div.span6.box
-        div
-          img(src="/images/feed.jpg").box-img
-          h4 Feed
-          p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
-
-      div.span6.box
-        div
-          img(src="/images/notification.png").box-img
-          h4 Notification
-          p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+  .container
+    .row-fluid
+      .span4
+        h2
+          i.icon-info-sign
+          |  Public Dashboard
+        p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+      .span4
+        h2
+          i.icon-rss
+          |  RSS
+        p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+      .span4
+        h2
+          i.icon-envelope
+          |  Notifications
+        p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.

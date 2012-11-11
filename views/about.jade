@@ -1,5 +1,17 @@
 extends layout
 
 block content
-  h1 About Us
-  h2 We are awesome!
+  .container
+    .row
+      .span6.person
+        img(src='https://secure.gravatar.com/avatar/793cb14014cf80f88bba31b1adcbd338?s=240',class='img-circle')
+        h2
+          a(href='https://github.com/josedonizetti')
+            i.icon-github
+          |  Jose
+      .span6.person
+        img(src='https://secure.gravatar.com/avatar/ba162f227525e37d91a86ef11789cc98?s=240',class='img-circle')
+        h2
+          a(href='https://github.com/pitr')
+            i.icon-github
+          |  pitr

@@ -1,13 +1,11 @@
 doctype 5
-html
+html(lang='en')
   head
     title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/responsive.css')
 
-    script(src='/javascript/bootstrap.js')
-    script(src='/javascript/backbone.js')
   body
     section.content
       .container-narrow.container.feed
@@ -26,6 +24,3 @@ html
                         .label.label-important.tag
                           i.icon-warning-sign
                       = message.p('body')
-    footer
-      div.footer
-        p.container-narrow.container @ Statusus - All rights reserved.
