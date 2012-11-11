@@ -16,9 +16,11 @@ block content
               for message in feed.messages
                 li
                   if message.p('resolved')
-                    .label.label-success.tag ok
+                    .label.label-success.tag
+                      i.icon-ok.icon-white
                   else
-                    .label.label-warning.tag not ok
+                    .label.label-important.tag
+                      i.icon-warning-sign
                   = message.p('body')
 
     .new-feed
