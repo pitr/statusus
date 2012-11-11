@@ -1,6 +1,6 @@
 {
   "name": "nko3-waterloo-napoleons",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Waterloo Napoleons",
   "main": "server.coffee",
   "scripts": {
