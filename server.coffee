@@ -1,4 +1,5 @@
 express = require('express')
+RedisStore = require('connect-redis')(express)
 http = require('http')
 path = require('path')
 app = express()
@@ -105,6 +106,19 @@ Message = Nohm.model 'Message',
 
 ## MIDDLEWARE
 
+redis_client = null
+
+app.configure 'development', ->
+  redis_client = redis.createClient()
+  Nohm.setClient(redis_client)
+
+app.configure 'production', ->
+  redis_client = redis.createClient(6379, 'nodejitsudb5865048577.redis.irstack.com', parser: 'javascript')
+  redis_client.auth 'nodejitsudb5865048577.redis.irstack.com:f327cfe980c971946e80b8e975fbebb4', (err) ->
+    throw err if err
+    Nohm.setClient(redis_client)
+
+
 app.configure ->
   app.set 'port', process.env.PORT || 8000
   app.set 'views', __dirname + '/views'
@@ -114,7 +128,7 @@ app.configure ->
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use express.cookieParser('mysecrethere')
-  app.use express.session()
+  app.use express.session(store: new RedisStore(client: redis_client))
   app.use require('less-middleware')(src: "#{__dirname}/less", dest: "#{__dirname}/public/stylesheets", prefix: '/stylesheets')
   app.use express.static(path.join(__dirname, 'public'))
   app.use (req, res, next) ->
@@ -135,15 +149,6 @@ app.configure ->
 
 app.configure 'development', ->
   app.use express.errorHandler()
-
-  client = redis.createClient()
-  Nohm.setClient(client)
-
-app.configure 'production', ->
-  client = redis.createClient(6379, 'nodejitsudb5865048577.redis.irstack.com', parser: 'javascript')
-  client.auth 'nodejitsudb5865048577.redis.irstack.com:f327cfe980c971946e80b8e975fbebb4', (err) ->
-    throw err if err
-    Nohm.setClient(client)
 
 ## HELPERS
 

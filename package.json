@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "express": "*",
+    "connect-redis": "*",
     "iced-coffee-script": "*",
     "jade": "*",
     "less-middleware": "*",
