@@ -8,8 +8,7 @@ app = express()
 ## MODEL
 
 {Nohm} = require('nohm')
-redis = require('redis').createClient()
-Nohm.setClient(redis)
+redis = require('redis')
 
 User = Nohm.model 'User',
   # has many feeds
@@ -85,6 +84,15 @@ app.configure ->
 
 app.configure 'development', ->
   app.use express.errorHandler()
+
+  client = redis.createClient()
+  Nohm.setClient(client)
+
+app.configure 'production', ->
+  client = redis.createClient(6379, 'nodejitsudb5865048577.redis.irstack.com', parser: 'javascript')
+  client.auth 'nodejitsudb5865048577.redis.irstack.com:f327cfe980c971946e80b8e975fbebb4', (err) ->
+    throw err if err
+    Nohm.setClient(client)
 
 ## SERVER
 
