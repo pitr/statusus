@@ -11,6 +11,7 @@
     "url": "git@github.com:nko3/waterloo-napoleons.git"
   },
   "dependencies": {
+    "ratchetio": "*",
     "supervisor": "*",
     "express": "*",
     "connect-redis": "*",

@@ -4,6 +4,9 @@ http = require('http')
 path = require('path')
 app = express()
 
+ratchet = require('ratchetio')
+ratchet.handleUncaughtExceptions("083c7b19508b4ff8905ad5be5ea7863d")
+
 uuid = require('node-uuid')
 {p} = require 'sys'
 
@@ -152,6 +155,7 @@ app.configure ->
     res.locals.show_navbar = yes
     next()
   app.use app.router
+  app.use(ratchet.errorHandler())
 
 app.configure 'development', ->
   app.use express.errorHandler()
