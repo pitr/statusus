@@ -37,10 +37,11 @@ block content
                       time.muted(datetime=new Date(message.p('created_at')).toISOString())= new Date(message.p('created_at')).toLocaleString()
                       | )
 
-      .span4
-        .well.feed.center
-          form(method='POST',action='/feeds')
-            h2 New Project
-            .input-append
-              input(type='text',name='name',placeholder='name',required).input-small
-              button.btn.btn-success(name='create',value='create',type='submit') Create
+      if feeds.length < 3
+        .span4
+          .well.feed.center
+            form(method='POST',action='/feeds')
+              h2 New Project
+              .input-append
+                input(type='text',name='name',placeholder='name',required).input-small
+                button.btn.btn-success(name='create',value='create',type='submit') Create
