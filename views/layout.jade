@@ -6,6 +6,7 @@ html(lang='en')
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/responsive.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', type='text/css', href='http://pixie.nko3.jitsu.com/build/build.css')
 
   body
     .navbar.navbar-fixed-top
@@ -28,3 +29,15 @@ html(lang='en')
                 a(href='/logout') Logout
 
     block content
+
+    script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js')
+    script(type='text/javascript', src='http://pixie.nko3.jitsu.com/build/build.js')
+    script(type='text/javascript')
+      var Feedbacks = require('oivoodoo-feedbacks')
+      new Feedbacks({
+        label: 'Feedback',
+        position: 'left', // || 'right', // position on the screen
+        class: 'button1', // || 'button2' || 'button3' || 'button4', // different colors for the button
+        key: '0ccad77e79933a201fba364303df30bb',
+        url: 'http://pixie.nko3.jitsu.com/emails'
+      })
