@@ -37,6 +37,8 @@ html(lang='en')
                 li
                   a(href='/feeds') My Feeds
                 li
+                  a(href="/dashboard/#{user.p('dashboard_udid')}") Public Dashboard
+                li
                   a(href='/logout') Logout
 
     block content
