@@ -145,6 +145,9 @@ app.configure ->
         next()
     else
       next()
+  app.use (req, res, next) ->
+    res.locals.show_navbar = yes
+    next()
   app.use app.router
 
 app.configure 'development', ->
@@ -185,6 +188,7 @@ app.post '/', (req, res, next) ->
 
 
 app.get '/dashboard/:udid', (req, res, next) ->
+  res.locals.show_navbar = no
   dashboard_udid = req.param('udid')
   User.find {dashboard_udid}, (err, user_ids) ->
     if user_ids.length > 0

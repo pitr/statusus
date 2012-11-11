@@ -203,6 +203,10 @@
         return next();
       }
     });
+    app.use(function(req, res, next) {
+      res.locals.show_navbar = true;
+      return next();
+    });
     return app.use(app.router);
   });
 
@@ -263,6 +267,7 @@
 
   app.get('/dashboard/:udid', function(req, res, next) {
     var dashboard_udid;
+    res.locals.show_navbar = false;
     dashboard_udid = req.param('udid');
     return User.find({
       dashboard_udid: dashboard_udid
@@ -315,7 +320,7 @@
                             return messages = arguments[0];
                           };
                         })(),
-                        lineno: 198
+                        lineno: 202
                       }));
                       __iced_deferrals._fulfill();
                     })(function() {
@@ -389,7 +394,7 @@
                     return messages = arguments[0];
                   };
                 })(),
-                lineno: 217
+                lineno: 221
               }));
               __iced_deferrals._fulfill();
             })(function() {
