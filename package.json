@@ -4,7 +4,7 @@
   "description": "Waterloo Napoleons",
   "main": "server.coffee",
   "scripts": {
-    "start": "node_modules/.bin/iced server.coffee"
+    "start": "iced server.coffee"
   },
   "repository": {
     "type": "git",
