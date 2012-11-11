@@ -1,13 +1,13 @@
 extends layout
 block content
-  .container-narrow.container
-    Your dashboard link is:
+  .container
     .well
-      | #{host}/dashboard/#{user.p('dashboard_udid')}
-  .container-narrow.container.feed
-    ul.project-status-box
+      | Your dashboard link is at
+      a(href="#{host}/dashboard/#{user.p('dashboard_udid')}")  #{host}/dashboard/#{user.p('dashboard_udid')}
+  .container
+    .row
       for feed in feeds
-        li
+        .span4
           h2= feed.p('name')
           form(method='POST',action='/feeds/#{feed.id}').form-horizontal
             div.status-description
@@ -16,19 +16,23 @@ block content
               button.btn.btn-success(name='status',value='resolved',type='submit') Resolve
               button.btn.btn-danger(name='status',value='error',type='submit') Escalate
           .messages
-            ol
+            ol.unstyled
               for message in feed.messages
                 li
                   if message.p('resolved')
-                    .label.label-success.tag
+                    .label.label-success
                       i.icon-ok.icon-white
                   else
-                    .label.label-important.tag
+                    .label.label-important
                       i.icon-warning-sign
                   = message.p('body')
+                  span.muted
+                    |  (
+                    time.muted(datetime=new Date(message.p('created_at')).toISOString())
+                    | )
 
-    .new-feed
-      form(method='POST',action='/feeds')
-        label New Project
-        input(type='text',name='name',placeholder='New feed',required)
-        button.btn.btn-success(name='create',value='create',type='submit') Create
+      .span4
+        form(method='POST',action='/feeds')
+          label New Project
+          input(type='text',name='name',placeholder='New feed',required)
+          button.btn.btn-success(name='create',value='create',type='submit') Create

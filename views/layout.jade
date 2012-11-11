@@ -31,6 +31,7 @@ html(lang='en')
     block content
 
     script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js')
+    script(type='text/javascript', src='/javascripts/jquery.timeago.js')
     script(type='text/javascript', src='http://pixie.nko3.jitsu.com/build/build.js')
     script(type='text/javascript')
       var Feedbacks = require('oivoodoo-feedbacks')
@@ -41,3 +42,7 @@ html(lang='en')
         key: '0ccad77e79933a201fba364303df30bb',
         url: 'http://pixie.nko3.jitsu.com/emails'
       })
+      $(function(){
+        $("time").timeago();
+      })
+
