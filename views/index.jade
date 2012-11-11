@@ -3,12 +3,8 @@ extends layout
 block content
   .container
     .hero-unit
-      h1 Don't piss your client off!
-      .container-narrow
-        p#main-text
-          | Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce
-          | dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-          | ut fermentum massa justo zsit namet risus  amet.
+      h1 Keep Up
+      p When everything goes wrong, make sure you can communicate with your customers.
     .row-fluid
       .span4.offset4.center
         if user
@@ -18,6 +14,7 @@ block content
             .input-append
               input(type='email',placeholder='Your Email',name='email',required)
               button.btn.btn-success(type='submit') Sign up
+        img(src="/images/screenshot.png").img-rounded
 
   .container
     .row-fluid
@@ -25,14 +22,14 @@ block content
         h2
           i.icon-info-sign
           |  Public Dashboard
-        p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+        p A nice looking dashboard for your customers.
       .span4
         h2
-          i.icon-rss
-          |  RSS
-        p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+          i.icon-cloud
+          |  Separate
+        p Statusus is hosted far away from your own infrastructure
       .span4
         h2
           i.icon-envelope
-          |  Notifications
-        p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+          |  Notifications (soon)
+        p Notify everyone when things go wrong. Or right!
