@@ -6,8 +6,6 @@
   - all.rss
   - feed-42.rss
 2. Pretty Dashboard
-  - Add timeago to dates
-  - Refresh every 10 seconds
   - Agregate by day (like GitHub)
   - Project's status is its last message's status (resolved/failing)
 3. (optional) Subscribe to email for alerts on dashboard (http://blog.nodeknockout.com/post/34641712180/sending-email-from-node-js)

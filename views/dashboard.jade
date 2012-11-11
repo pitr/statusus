@@ -1,29 +1,44 @@
 extends layout
 block content
+  .navbar-fixed-top
+    .container
+      .pull-right
+        h4
+          | Refreshes in
+          i.timeout  10
+          |  seconds
   .container
     .row
       for feed in feeds
         .span4
           .well.feed
             h2= feed.p('name')
-            form(method='POST',action='/feeds/#{feed.id}')
-              div.status-description
-                textarea(name='body',rows=3,placeholder='Message (e.g. We are investigating problems with DNS)').input-block-level
-              div.status-buttons
-                button.btn.btn-danger(name='status',value='error',type='submit') Escalate
-                button.btn.btn-success(name='status',value='resolved',type='submit').pull-right Resolve
             .messages
-              ol.unstyled
-                for message in feed.messages
-                  li
-                    if message.p('resolved')
-                      .label.label-success
-                        i.icon-ok.icon-white
-                    else
-                      .label.label-important
-                        i.icon-warning-sign
-                    |  #{message.p('body')}
-                    span.muted
-                      |  (
-                      time.muted(datetime=new Date(message.p('created_at')).toISOString())= new Date(message.p('created_at')).toLocaleString()
-                      | )
+              if feed.messages.length < 1
+                .muted Everything is Okay
+              else
+                ol.unstyled
+                  for message in feed.messages
+                    li
+                      if message.p('resolved')
+                        .label.label-success
+                          i.icon-ok.icon-white
+                      else
+                        .label.label-important
+                          i.icon-warning-sign
+                      |  #{message.p('body')}
+                      span.muted
+                        |  (
+                        time.muted(datetime=new Date(message.p('created_at')).toISOString())= new Date(message.p('created_at')).toLocaleString()
+                        | )
+block js
+  script(type='text/javascript')
+    var timeout = 11 // seconds
+    var tick = function(){
+      if(--timeout < 1)
+        document.location.reload()
+      else
+        $('.timeout').text(' ' + timeout)
+        setTimeout(tick, 1000)
+    }
+    tick()
