@@ -3,6 +3,7 @@ http = require('http')
 path = require('path')
 app = express()
 
+uuid = require('node-uuid')
 {p} = require 'sys'
 
 ## MODEL
@@ -19,15 +20,33 @@ User = Nohm.model 'User',
       unique: true
       index: true
       validations: ['email']
-    visits:
-      type: (value, key, old) -> old + value
-      defaultValue: 0
-      index: true
     created_at:
       type: 'timestamp'
-      defaultValue: -> new Date()
+    dashboard_udid:
+      type: 'string'
+      index: true
   methods:
-    full_name: -> "#{@p('name')} (#{@p('email')})"
+    create: (data, next, cb) ->
+      @p(data)
+      @p('created_at', +new Date())
+      @p('dashboard_udid', uuid.v1())
+      @save (err) ->
+        if err == 'invalid'
+          next(@errors)
+        else if err
+          next(err)
+        else
+          cb(@)
+    get_feeds: (err_cb, cb) ->
+      @getAll 'Feed', (err, feed_ids) ->
+        feeds = []
+        if feed_ids.length == 0
+          cb(feeds)
+        for feed_id in feed_ids
+          Feed.load feed_id, (err) ->
+            feeds.push @
+            if feed_ids.length == feeds.length
+              cb(feeds)
 
 Feed = Nohm.model 'Feed',
   # belong to User
@@ -39,8 +58,17 @@ Feed = Nohm.model 'Feed',
       validations: ['notEmpty']
     created_at:
       type: 'timestamp'
-      defaultValue: -> new Date()
   methods:
+    create: (data, next, cb) ->
+      @p(data)
+      @p('created_at', +new Date())
+      @save (err) ->
+        if err == 'invalid'
+          next(@errors)
+        else if err
+          next(err)
+        else
+          cb(@)
     get_messages: (err_cb, cb) ->
       @getAll 'Message', (err, message_ids) ->
         messages = []
@@ -62,8 +90,17 @@ Message = Nohm.model 'Message',
       type: 'boolean'
     created_at:
       type: 'timestamp'
-      defaultValue: -> new Date()
-
+  methods:
+    create: (data, next, cb) ->
+      @p(data)
+      @p('created_at', +new Date())
+      @save (err) ->
+        if err == 'invalid'
+          next(@errors)
+        else if err
+          next(err)
+        else
+          cb(@)
 
 
 ## MIDDLEWARE
@@ -78,9 +115,23 @@ app.configure ->
   app.use express.methodOverride()
   app.use express.cookieParser('mysecrethere')
   app.use express.session()
-  app.use app.router
   app.use require('less-middleware')({ src: __dirname + '/public' })
   app.use express.static(path.join(__dirname, 'public'))
+  app.use (req, res, next) ->
+    # try to authenticate, ignore failure silently
+    req.user = null
+    res.locals.user = null
+    if req.session.user_id
+      User.load req.session.user_id, (err) ->
+        if err
+          req.session.user_id = null
+        else
+          req.user = @
+          res.locals.user = @
+        next()
+    else
+      next()
+  app.use app.router
 
 app.configure 'development', ->
   app.use express.errorHandler()
@@ -94,59 +145,82 @@ app.configure 'production', ->
     throw err if err
     Nohm.setClient(client)
 
+## HELPERS
+
 ## SERVER
 
-app.get '/', (req, res) -> res.render 'index', title: 'Statusus'
-app.get '/pricing', (req, res) -> res.render 'pricing', title: 'Statusus'
-app.get '/about', (req, res) -> res.render 'about', title: 'Statusus'
-app.get '/login', (req, res) -> res.render 'login', title: 'Statusus'
+app.get '/', (req, res, next) ->
+  res.render 'index', title: 'Statusus'
+
+app.get '/pricing', (req, res, next) -> res.render 'pricing', title: 'Statusus'
+app.get '/about', (req, res, next) -> res.render 'about', title: 'Statusus'
+
+app.get '/logout', (req, res, next) ->
+  delete req.session.user_id
+  res.redirect '/'
+
+app.post '/', (req, res, next) ->
+  if req.session.user_id
+    res.redirect '/feeds'
+    return
+
+  email = req.param('email')
+  User.find {email}, (err, user_ids) ->
+    if err
+      next(err)
+    else if user_ids.length == 1
+      # found one user
+      req.session.user_id = user_ids[0]
+      res.redirect '/feeds'
+    else
+      user = Nohm.factory('User')
+      user.create {email}, next, ->
+        req.session.user_id = user.id
+        res.redirect '/feeds'
+
+
+
+#---- all requests must be authenticated beyond this point ----#
+
+app.all '*', (req, res, next) ->
+  if req.user
+    next()
+  else
+    res.redirect '/'
+
 
 app.get '/feeds', (req, res, next) ->
-  Feed.find (err, feed_ids) ->
-    next(err) if err
-    feeds = []
-    if feed_ids.length == 0
-      return res.render 'feeds', title: 'Feeds', feeds: feeds
-    for feed_id in feed_ids
-      Feed.load feed_id, (err) ->
-        return next(err) if err
-        @get_messages next, (messages) =>
-          @messages = messages
-          feeds.push @
-          if feed_ids.length == feeds.length
-            res.render 'feeds', title: 'Feeds', feeds: feeds
+  req.user.get_feeds next, (feeds) ->
+    for feed in feeds
+      await feed.get_messages next, defer(messages)
+      feed.messages = messages
+    res.render 'feeds', title: 'Feeds', feeds: feeds
 
 app.post '/feeds', (req, res, next) ->
   name = req.param('name')
   feed = Nohm.factory('Feed')
-  feed.p(name: name)
-  feed.save (err) ->
-    if err == 'invalid'
-      next(feed.errors)
-    else if err
-      next(err)
-    else
+  feed.create name: name, next, ->
+    req.user.link(feed)
+    req.user.save ->
+      # res.status 201
+      # res.json data: feed.allProperties()
       res.redirect '/feeds'
 
 app.post '/feeds/:feed_id', (req, res, next) ->
   Feed.load req.param('feed_id'), (err) ->
+    # TODO: check if feed belongs to user
     return next(err) if err
     feed = @
 
     body = req.param('body')
     resolved = req.param('status') == 'resolved'
     message = Nohm.factory('Message')
-    message.p({body, resolved})
-    message.save (err) ->
-      if err == 'invalid'
-        next(message.errors)
-      else if err
-        next(err)
-      else
-        feed.link message
-        feed.save ->
-          res.status 201
-          res.json data: message.allProperties()
+    message.create {body, resolved}, next, ->
+      feed.link message
+      feed.save ->
+        # res.status 201
+        # res.json data: message.allProperties()
+        res.redirect '/feeds'
 
 http.createServer(app).listen app.get('port'), ->
   console.log "Express server listening on port #{app.get('port')}"
