@@ -1,26 +1,28 @@
 extends layout
-feeds=[]
 block content
-  h1 Feeds
-  a(href='/') logout
-  ul
-    for feed in feeds
-      li
-        h2= feed.p('name')
-        ol
-          for message in feed.messages
-            li
-              if message.p('resolved')
-                .label.label-success ok
-              else
-                .label.label-warning not ok
-              = message.p('body')
-        form(method='POST',action='/feeds/#{feed.id}').form-horizontal
-          textarea(name='body',rows=3,placeholder='Message (e.g. We are investigating problems with DNS)')
-          br
-          button.btn.btn-success(name='status',value='resolved',type='submit') Resolve
-          button.btn.btn-danger(name='status',value='error',type='submit') Escalate
+  .container-narrow.container.feed
+    ul.project-status-box
+      for feed in feeds
+        li
+          h2= feed.p('name')
+          form(method='POST',action='/feeds/#{feed.id}').form-horizontal
+            div.status-description
+              textarea(name='body',rows=3,placeholder='Message (e.g. We are investigating problems with DNS)')
+            div.status-buttons
+              button.btn.btn-success(name='status',value='resolved',type='submit') Resolve
+              button.btn.btn-danger(name='status',value='error',type='submit') Escalate
+          .messages
+            ol
+              for message in feed.messages
+                li
+                  if message.p('resolved')
+                    .label.label-success.tag ok
+                  else
+                    .label.label-warning.tag not ok
+                  = message.p('body')
 
-    li
+    .new-feed
       form(method='POST',action='/feeds')
+        label New Project
         input(type='text',name='name',placeholder='New feed',required)
+        button.btn.btn-success(name='create',value='create',type='submit') Create

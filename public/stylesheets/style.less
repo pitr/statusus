@@ -1,12 +1,26 @@
+
+// layout.jade
+
+header {
+  height: 100px;
+  padding-top: 40px;
+}
+
+footer {
+  background-color: black;
+  height: 40px;
+
+  p {
+    padding-top: 10px;
+    color: #F8F8F8;
+    font-size: 12px;
+  }
+}
+
 .container-narrow {
     margin: 0px auto;
     max-width: 854px;
     position: relative;
-}
-
-.top {
-  margin-top: 40px;
-  padding-bottom: 10px;
 }
 
 #logo {
@@ -15,7 +29,15 @@
 }
 
 .menu {
-  padding-top: 21px;
+  padding-top: 20px;
+}
+
+// index.jade
+
+h2 {
+  margin: 0px;
+  padding-top: 36px;
+
 }
 
 .row-fluid .offset4.singup{
@@ -23,13 +45,11 @@
 }
 
 #main-marking-text {
-  margin-top: 20px;
-  padding-top: 36px;
   font-size: 72px;
   line-height: 1;
   font-weight: bold;
   background: url("/images/perspective.png");
-  height: 125px;
+  height: 115px;
   color:  #282629;
   text-align: center;
 }
@@ -53,20 +73,93 @@
   float: left;
 }
 
-footer {
-  background-color: black;
-  height: 40px;
-
-  p {
-    padding-top: 10px;
-    color: #F8F8F8;
-    font-size: 12px;
-  }
-}
-
 .content {
-  height: 537px;
+  height: 525px;
   overflow: hidden;
 }
 
-// Status Page
+// feed.jade
+ul, li {
+  list-style: none;
+}
+
+.new-feed {
+  margin-top: 30px;
+
+  label {
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  input {
+    width: 300px;
+    margin: 0px;
+  }
+
+  button {
+    margin-left: 5px;
+    margin-bottom: 0px;
+  }
+
+  clear: both;
+}
+
+.messages {
+  float: left;
+
+  ol {
+    width: 400px;
+    padding: 0px;
+    margin: 0px;
+
+    li {
+      padding: 2px;
+
+      .tag {
+         margin-right: 8px;
+      }
+    }
+  }
+}
+
+.status-description {
+  float: left;
+
+  textarea {
+    width: 300px;
+  }
+}
+
+.status-buttons {
+  float: left;
+
+  button {
+    display: block;
+    margin-bottom: 7px;
+  }
+}
+
+.feed {
+
+  button {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 100px;
+  }
+
+}
+
+.project-status-box {
+  overflow: hidden;
+  margin: 0px;
+
+  h2 {
+    clear: both;
+    padding: 0px;
+  }
+
+  form  {
+    display: inline;
+  }
+}
