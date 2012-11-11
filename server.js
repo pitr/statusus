@@ -264,6 +264,7 @@
         return res.redirect('/feeds');
       } else {
         user = Nohm.factory('User');
+        ratchet.reportMessage("New user - " + email, 'info', req);
         return user.create({
           email: email
         }, next, function() {
@@ -329,7 +330,7 @@
                             return messages = arguments[0];
                           };
                         })(),
-                        lineno: 209
+                        lineno: 210
                       }));
                       __iced_deferrals._fulfill();
                     })(function() {
@@ -403,7 +404,7 @@
                     return messages = arguments[0];
                   };
                 })(),
-                lineno: 228
+                lineno: 229
               }));
               __iced_deferrals._fulfill();
             })(function() {

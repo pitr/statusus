@@ -189,6 +189,7 @@ app.post '/', (req, res, next) ->
       res.redirect '/feeds'
     else
       user = Nohm.factory('User')
+      ratchet.reportMessage("New user - #{email}", 'info', req)
       user.create {email}, next, ->
         req.session.user_id = user.id
         res.redirect '/feeds'
