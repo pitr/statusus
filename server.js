@@ -81,6 +81,10 @@
         type: 'string',
         validations: ['notEmpty']
       },
+      resolved: {
+        type: 'boolean',
+        defaultValue: true
+      },
       created_at: {
         type: 'timestamp'
       }
@@ -320,7 +324,7 @@
                             return messages = arguments[0];
                           };
                         })(),
-                        lineno: 202
+                        lineno: 205
                       }));
                       __iced_deferrals._fulfill();
                     })(function() {
@@ -394,7 +398,7 @@
                     return messages = arguments[0];
                   };
                 })(),
-                lineno: 221
+                lineno: 224
               }));
               __iced_deferrals._fulfill();
             })(function() {
@@ -440,6 +444,7 @@
         resolved: resolved
       }, next, function() {
         feed.link(message);
+        feed.p('resolved', resolved);
         return feed.save(function() {
           return res.redirect('/feeds');
         });

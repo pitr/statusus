@@ -11,8 +11,13 @@ block content
     .row
       for feed in feeds
         .span4
-          .well.feed
-            h2= feed.p('name')
+          .well.feed(class="feed-resolved-#{feed.p('resolved')}")
+            h2
+              if feed.p('resolved')
+                i.icon-ok
+              else
+                i.icon-warning-sign
+              |  #{feed.p('name')}
             .messages
               if feed.messages.length < 1
                 .muted Everything is Okay

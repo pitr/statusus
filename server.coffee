@@ -57,6 +57,9 @@ Feed = Nohm.model 'Feed',
     name:
       type: 'string'
       validations: ['notEmpty']
+    resolved:
+      type: 'boolean'
+      defaultValue: true
     created_at:
       type: 'timestamp'
   methods:
@@ -244,6 +247,7 @@ app.post '/feeds/:feed_id', (req, res, next) ->
     message = Nohm.factory('Message')
     message.create {body, resolved}, next, ->
       feed.link message
+      feed.p('resolved', resolved)
       feed.save ->
         # res.status 201
         # res.json data: message.allProperties()

@@ -1,9 +1,19 @@
+@import "variables.less";
+
 body {
   padding-top: 80px;
 }
 
 .feed {
   background: white;
+}
+
+.feed-resolved-true {
+  background: lighten(@green, 45%);
+}
+
+.feed-resolved-false {
+  background: lighten(@red, 45%);
 }
 
 .voting {

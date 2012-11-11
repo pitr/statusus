@@ -2,14 +2,19 @@ extends layout
 block content
   .container
     .well
-      | Your dashboard link is at
+      | Your dashboard link is
       a(href="#{host}/dashboard/#{user.p('dashboard_udid')}")  #{host}/dashboard/#{user.p('dashboard_udid')}
   .container
     .row
       for feed in feeds
         .span4
-          .well.feed
-            h2= feed.p('name')
+          .well.feed(class="feed-resolved-#{feed.p('resolved')}")
+            h2
+              if feed.p('resolved')
+                i.icon-ok
+              else
+                i.icon-warning-sign
+              |  #{feed.p('name')}
             form(method='POST',action='/feeds/#{feed.id}')
               div.status-description
                 textarea(name='body',rows=3,placeholder='Message (e.g. We are investigating problems with DNS)').input-block-level
