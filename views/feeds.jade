@@ -1,5 +1,9 @@
 extends layout
 block content
+  .container-narrow.container
+    Your dashboard link is:
+    .well
+      | #{host}/dashboard/#{user.p('dashboard_udid')}
   .container-narrow.container.feed
     ul.project-status-box
       for feed in feeds

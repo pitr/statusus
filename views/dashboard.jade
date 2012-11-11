@@ -1,0 +1,31 @@
+doctype 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+    script(src='/javascript/bootstrap.js')
+    script(src='/javascript/backbone.js')
+  body
+    section.content
+      .container-narrow.container.feed
+        ul.project-status-box
+          for feed in feeds
+            li
+              h2= feed.p('name')
+              .messages
+                ol
+                  for message in feed.messages
+                    li
+                      if message.p('resolved')
+                        .label.label-success.tag
+                          i.icon-ok.icon-white
+                      else
+                        .label.label-important.tag
+                          i.icon-warning-sign
+                      = message.p('body')
+    footer
+      div.footer
+        p.container-narrow.container @ Statusus - All rights reserved.

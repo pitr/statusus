@@ -168,8 +168,8 @@ app.post '/', (req, res, next) ->
   User.find {email}, (err, user_ids) ->
     if err
       next(err)
-    else if user_ids.length == 1
-      # found one user
+    else if user_ids.length > 0
+      # found a user
       req.session.user_id = user_ids[0]
       res.redirect '/feeds'
     else
@@ -178,6 +178,24 @@ app.post '/', (req, res, next) ->
         req.session.user_id = user.id
         res.redirect '/feeds'
 
+
+app.get '/dashboard/:udid', (req, res, next) ->
+  dashboard_udid = req.param('udid')
+  User.find {dashboard_udid}, (err, user_ids) ->
+    if user_ids.length > 0
+      # found a user
+      User.load user_ids[0], (err) ->
+        if err
+          next(err)
+        else
+          user = @
+          user.get_feeds next, (feeds) ->
+            for feed in feeds
+              await feed.get_messages next, defer(messages)
+              feed.messages = messages
+            res.render 'dashboard', title: 'Dashboard', feeds: feeds
+    else
+      next(err)
 
 
 #---- all requests must be authenticated beyond this point ----#
@@ -194,7 +212,7 @@ app.get '/feeds', (req, res, next) ->
     for feed in feeds
       await feed.get_messages next, defer(messages)
       feed.messages = messages
-    res.render 'feeds', title: 'Feeds', feeds: feeds
+    res.render 'feeds', title: 'Feeds', feeds: feeds, host: "#{req.protocol}://#{req.headers.host}"
 
 app.post '/feeds', (req, res, next) ->
   name = req.param('name')
