@@ -75,7 +75,7 @@ Feed = Nohm.model 'Feed',
         messages = []
         if message_ids.length == 0
           cb(messages)
-        for message_id in message_ids
+        for message_id in message_ids.reverse()
           Message.load message_id, (err) ->
             messages.push @
             if message_ids.length == messages.length

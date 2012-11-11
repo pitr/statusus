@@ -101,12 +101,13 @@
       },
       get_messages: function(err_cb, cb) {
         return this.getAll('Message', function(err, message_ids) {
-          var message_id, messages, _i, _len, _results;
+          var message_id, messages, _i, _len, _ref, _results;
           messages = [];
           if (message_ids.length === 0) cb(messages);
+          _ref = message_ids.reverse();
           _results = [];
-          for (_i = 0, _len = message_ids.length; _i < _len; _i++) {
-            message_id = message_ids[_i];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            message_id = _ref[_i];
             _results.push(Message.load(message_id, function(err) {
               messages.push(this);
               if (message_ids.length === messages.length) return cb(messages);
