@@ -1,8 +1,20 @@
 @import "variables.less";
 
+// general
+
 body {
   padding-top: 80px;
 }
+
+.voting {
+  padding: 8px 0 0 20px !important;
+}
+
+.center {
+  text-align: center;
+}
+
+// feed page
 
 .feed {
   background: white;
@@ -16,13 +28,7 @@ body {
   background: lighten(@red, 45%);
 }
 
-.voting {
-  padding: 8px 0 0 20px !important;
-}
-
-.center {
-  text-align: center;
-}
+// pricing page
 
 .price {
   border: 0;
@@ -66,6 +72,7 @@ ul.pricing li {
   border-bottom: 1px solid #e5e5e5;
 }
 
+// about page
 
 .person {
   text-align: center;
@@ -73,4 +80,10 @@ ul.pricing li {
 
 .person a {
   text-decoration: none;
+}
+
+// fix pixie
+#dialog {
+  width: inherit;
+  margin: inherit;
 }
