@@ -2,12 +2,12 @@
 
 ## TODO (add yours)
 
-1. RSS of Dashboard
+1. (NO) RSS of Dashboard
   - all.rss
   - feed-42.rss
-2. Pretty Dashboard
+2. (NO) Pretty Dashboard
   - Agregate by day (like GitHub)
-3. (optional) Subscribe to email for alerts on dashboard (http://blog.nodeknockout.com/post/34641712180/sending-email-from-node-js)
+3. (NO) Subscribe to email for alerts on dashboard (http://blog.nodeknockout.com/post/34641712180/sending-email-from-node-js)
 
 ## Nodejitsu
 
