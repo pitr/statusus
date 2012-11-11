@@ -1,10 +1,10 @@
 {
   "name": "nko3-waterloo-napoleons",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Waterloo Napoleons",
   "main": "server.coffee",
   "scripts": {
-    "start": "node_modules/.bin/coffee server.coffee"
+    "start": "node_modules/.bin/iced server.coffee"
   },
   "repository": {
     "type": "git",
