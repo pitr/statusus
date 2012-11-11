@@ -15,6 +15,11 @@ html
         ul.nav.nav-pills.pull-right.menu
           li.active
             a(href='/') Home
+          if user
+            li
+              a(href='/feeds') My Feeds
+            li
+              a(href='/logout') Logout
           li
             a(href='/pricing') Pricing
           li

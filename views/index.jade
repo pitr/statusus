@@ -11,10 +11,13 @@ block content
           | ut fermentum massa justo zsit namet risus  amet.
     .row-fluid
       .span4.offset4.singup
-        form(method='POST',action='/')
-          .input-append
-            input(type='email',placeholder='Your Email',name='email',required,value='a@b.com')
-            button.btn.btn-success(type='submit') Sign up
+        if user
+          a(href='/feeds').btn.btn-large.btn-success Continue
+        else
+          form(method='POST',action='/')
+            .input-append
+              input(type='email',placeholder='Your Email',name='email',required,value='a@b.com')
+              button.btn.btn-success(type='submit') Sign up
 
 
   div.container-narrow
