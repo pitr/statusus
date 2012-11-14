@@ -25,5 +25,6 @@
   "engines": {
     "node": "0.8.x"
   },
+  "domains": ["statusus.io","www.statusus.io"],
   "subdomain": "waterloo-napoleons.nko3"
 }
