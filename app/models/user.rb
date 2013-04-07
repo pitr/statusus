@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   before_create :set_uuid
 
 
-private
+  private
 
   def set_uuid
     self.uuid = SecureRandom.uuid
