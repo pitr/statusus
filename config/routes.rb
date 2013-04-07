@@ -12,5 +12,8 @@ Statusus::Application.routes.draw do
 
   get '/dashboard/:uuid' => 'feeds#dashboard', :as => :dashboard
 
+  post "heroku/resources" => "heroku#create"
+  delete "heroku/resources/:id" => "heroku#destroy"
+
   root :to => 'application#welcome'
 end
