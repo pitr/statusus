@@ -1,0 +1,46 @@
+doctype 5
+html lang='en'
+  head
+    title= yield(:title) ||  'Statusus'
+    = stylesheet_link_tag    'application', :media => 'all'
+    = csrf_meta_tags
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+
+  body
+    - if Rails.env.production?
+      javascript:
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-6389050-7']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    - if @hide_navbar.nil?
+      .navbar.navbar-fixed-top
+        .navbar-inner
+          .container
+            = link_to 'Statusus', root_path, class: 'brand'
+            ul.nav
+              li
+                = link_to 'Pricing', pricing_path
+              li
+                = link_to 'About Us', about_path
+            - if user_signed_in?
+              ul.nav.pull-right
+                li
+                  = link_to 'My Feeds', '/feeds'
+                li
+                  = link_to 'Public Dashboard', dashboard_path(current_user.uuid)
+                li
+                  = link_to 'Logout', destroy_user_session_path, method: :delete
+
+      p class='notice' = notice
+      p class='alert' = alert
+
+    = yield
+
+    = javascript_include_tag 'application'
+    = yield(:js)

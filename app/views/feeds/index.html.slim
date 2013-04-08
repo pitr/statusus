@@ -1,0 +1,45 @@
+.container
+  .well
+    ' Your PUBLIC dashboard link is
+    = link_to dashboard_url(current_user.uuid), dashboard_url(current_user.uuid)
+.container
+  .row
+    - @feeds.each do |feed|
+      .span4
+        .well.feed class="feed-resolved-#{feed.resolved}"
+          h2
+            - if feed.resolved
+              i.icon-ok
+            - else
+              i.icon-warning-sign
+            |  #{feed.name}
+          = form_for [feed, Message.new] do |f|
+            div.status-description
+              = f.text_area :body, :rows => 3, :class => 'input-block-level', :placeholder => 'Message (e.g. We are investigating problems with DNS)'
+            div.status-buttons
+              = f.button 'Escalate', :class => 'btn btn-danger', :name => 'message[resolved]', :value => false
+              = f.button 'Resolve', :class => 'btn btn-success pull-right', :name => 'message[resolved]', :value => true
+          .messages
+            ol.unstyled
+              - feed.messages.each do |message|
+                li
+                  - if message.resolved
+                    .label.label-success
+                      i.icon-ok.icon-white
+                  - else
+                    .label.label-important
+                      i.icon-warning-sign
+                  |  #{message.body}
+                  span.muted
+                    |  (
+                    time.muted datetime=message.created_at.getutc.iso8601 = message.created_at
+                    | )
+
+    - if @feeds.length < 3
+      .span4
+        .well.feed.center
+          = form_for Feed.new do |f|
+            h2 New Project
+            .input-append
+              = f.text_field :name, :class => 'input-small', :required => true
+              = f.submit 'Create', :class => 'btn btn-success', :disable_with => "Please wait..."
