@@ -1,0 +1,32 @@
+.container
+  .hero-unit
+    h1 Be visible
+    p When everything goes wrong, make sure you can communicate with your customers.
+  .row-fluid
+    .span4.offset4.center
+      - if user_signed_in?
+        = link_to 'Continue to feeds', feeds_path, :class => 'btn btn-large btn-success'
+      - else
+        form method='POST' action='/'
+          .input-append
+            input type='email' placeholder='Your Email' name='email' required='yes'
+            button.btn.btn-success type='submit' Sign up
+      = image_tag 'screenshot.png', :class => 'img-rounded screenshot'
+
+.container
+  .row-fluid
+    .span4
+      h2
+        i.icon-info-sign
+        |  Public Dashboard
+      p A nice looking dashboard for your customers.
+    .span4
+      h2
+        i.icon-cloud
+        |  Separate
+      p Statusus is hosted far away from your own infrastructure
+    .span4
+      h2
+        i.icon-envelope
+        |  Notifications (soon)
+      p Notify everyone when things go wrong. Or right!

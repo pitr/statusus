@@ -1,0 +1,104 @@
+/*
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require bootstrap
+ *= require responsive
+ *= require_self
+ */
+
+@import "variables.less";
+
+// general
+
+body {
+ padding-top: 80px;
+}
+
+.voting {
+ padding: 8px 0 0 20px !important;
+}
+
+.center {
+ text-align: center;
+}
+
+// index
+
+.screenshot {
+ padding-top: 10px;
+}
+
+// feed page
+
+.feed {
+ background: white;
+}
+
+.feed-resolved-true {
+ background: lighten(@green, 45%);
+}
+
+.feed-resolved-false {
+ background: lighten(@red, 45%);
+}
+
+// pricing page
+
+.price {
+ border: 0;
+ background: white;
+ box-shadow: none;
+}
+
+.price h1 {
+ font-size: 10em;
+ line-height: 1em;
+}
+
+.price.push-down {
+ margin-top: 98px;
+}
+
+.price:hover {
+ -webkit-transform:scale(1.05);
+ -moz-transform: scale(1.05);
+
+ background: white;
+ box-shadow: 0 0 30px rgba(0, 0, 0, 0.67);
+ -moz-box-shadow: 0 0 30px rgba(0, 0, 0, 0.67);
+ -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.67);
+
+ -webkit-transition: all 0.2s linear;
+ -moz-transition: all 0.2s linear;
+ -ms-transition: all 0.2s linear;
+ -o-transition: all 0.2s linear;
+ transition: all 0.2s linear;
+
+ animation-duration: 2s;
+ animation-timing-function: ease-in-out;
+ animation-fill-mode: forwards;
+}
+
+ul.pricing li {
+ margin: 18px 10px;
+ padding-bottom: 10px;
+ border: 0;
+ border-bottom: 1px solid #e5e5e5;
+}
+
+// about page
+
+.person {
+ text-align: center;
+}
+
+.person a {
+ text-decoration: none;
+}
+
+// fix pixie
+#dialog {
+ width: inherit;
+ margin: inherit;
+}
