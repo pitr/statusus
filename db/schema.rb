@@ -15,9 +15,10 @@ ActiveRecord::Schema.define(:version => 20130327131355) do
 
   create_table "feeds", :force => true do |t|
     t.string   "name"
+    t.boolean  "resolved",   :default => true
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   add_index "feeds", ["user_id"], :name => "index_feeds_on_user_id"
