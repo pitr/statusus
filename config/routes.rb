@@ -11,6 +11,7 @@ Statusus::Application.routes.draw do
   post '/' => 'application#guest'
 
   get '/dashboard/:uuid' => 'feeds#dashboard', :as => :dashboard
+  get '/' => 'feeds#dashboard', :constraints => { :subdomain => /.+/ }
 
   post "heroku/resources" => "heroku#create"
   delete "heroku/resources/:id" => "heroku#destroy"

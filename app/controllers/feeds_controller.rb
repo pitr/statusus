@@ -16,7 +16,12 @@ class FeedsController < ApplicationController
   end
 
   def dashboard
-    @feeds = User.where(uuid: params[:uuid]).first.feeds.includes(:messages) # TODO: remove includes
+    @user = if params[:uuid]
+      User.where(uuid: params[:uuid]).first
+    else
+      User.where(cname: request.host).first
+    end
+    @feeds = @user.feeds.includes(:messages) # TODO: remove includes
     @hide_navbar = true
   end
 end
