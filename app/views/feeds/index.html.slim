@@ -2,6 +2,7 @@
   .well
     ' Your PUBLIC dashboard link is
     = link_to dashboard_url(current_user.uuid), dashboard_url(current_user.uuid)
+
 .container
   .row
     - @feeds.each do |feed|
