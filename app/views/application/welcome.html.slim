@@ -7,10 +7,21 @@
       - if user_signed_in?
         = link_to 'Continue to feeds', feeds_path, :class => 'btn btn-large btn-success'
       - else
-        form method='POST' action='/'
+        = form_for(User.new, :url => registration_path(User)) do |f|
           .input-append
-            input type='email' placeholder='Your Email' name='email' required='yes'
-            button.btn.btn-success type='submit' Sign up
+
+            div
+              = f.label :email
+              = f.email_field :email, autofocus: true, required: true
+
+            div
+              = f.label :password
+              = f.password_field :password, required: true
+
+            = f.submit "Sign up", class: 'btn btn-success'
+        p
+          ' Or
+          = link_to 'Login', new_user_session_path, class: 'btn'
       = image_tag 'screenshot.png', :class => 'img-rounded screenshot'
 
 .container

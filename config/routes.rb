@@ -3,12 +3,10 @@ Statusus::Application.routes.draw do
     resources :messages, :only => :create
   end
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => :registrations }
 
   get '/pricing' => 'application#pricing'
   get '/about' => 'application#about'
-
-  post '/' => 'application#guest'
 
   get '/dashboard/:uuid' => 'feeds#dashboard', :as => :dashboard
   get '/' => 'feeds#dashboard', :constraints => { :subdomain => /.+/ }
