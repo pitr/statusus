@@ -31,16 +31,22 @@ html lang='en'
             - if user_signed_in?
               ul.nav.pull-right
                 li
-                  = link_to 'My Feeds', '/feeds'
+                  = link_to 'My Feeds', feeds_path
                 li
                   = link_to 'Account', edit_user_registration_path
                 li
                   = link_to 'Public Dashboard', dashboard_path(current_user.uuid)
                 li
                   = link_to 'Logout', destroy_user_session_path, method: :delete
+            - else
+              ul.nav.pull-right
+                li
+                  = link_to 'Login', new_user_session_path
 
-      p class='notice' = notice
-      p class='alert' = alert
+      - if notice
+        .alert.alert-success = notice
+      - if alert
+        .alert.alert-error = alert
 
     = yield
 
