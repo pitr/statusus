@@ -14,5 +14,7 @@ Statusus::Application.routes.draw do
   post "heroku/resources" => "heroku#create"
   delete "heroku/resources/:id" => "heroku#destroy"
 
+  resources :api, only: :create
+
   root :to => 'application#welcome'
 end
