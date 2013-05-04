@@ -15,8 +15,8 @@ test:
 production:
   adapter: mysql2
   encoding: utf8
-  database: <%= ENV['RDS_DB_NAME'] %>
-  username: <%= ENV['RDS_USERNAME'] %>
-  password: <%= ENV['RDS_PASSWORD'] %>
-  host: <%= ENV['RDS_HOSTNAME'] %>
-  port: <%= ENV['RDS_PORT'] %>
+  database: statusus_production
+  username: statusus
+  password: 5tatu5u5
+  host: localhost
+  port: 3306
