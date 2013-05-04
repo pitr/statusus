@@ -9,7 +9,7 @@ Statusus::Application.routes.draw do
   get '/about' => 'application#about'
 
   get '/dashboard/:uuid' => 'feeds#dashboard', :as => :dashboard
-  get '/' => 'feeds#dashboard', :constraints => { :subdomain => /.+/ }
+  get '/' => 'feeds#dashboard', :constraints => lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
 
   post "heroku/resources" => "heroku#create"
   delete "heroku/resources/:id" => "heroku#destroy"
