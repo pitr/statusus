@@ -10,9 +10,16 @@ class User < ActiveRecord::Base
   attr_accessible :cname
 
   has_many :feeds
+  has_many :subscriptions
+  has_many :plans, through: :subscriptions
 
   before_create :set_uuid
 
+  scope :active, -> { where(active: true) }
+
+  def change_plan_to(plan)
+    plans << Plan.where(name: plan).first!
+  end
 
   private
 

@@ -1,17 +1,54 @@
 class HerokuController < ApplicationController
-  before_filter :heroku_authentication
+  before_filter :heroku_authentication, except: :login
+
+  SALT = 'b7LUzvupm7czgm5Q'
 
   def create
-    user = User.where(email: params[:heroku_id]).first_or_create!(password: 'helloworld')
-    #need a way to capture the user application name, not sure if heroku sends it
-    feed = user.feeds.build({ :name => "application#{rand(6)}"})
-    result = {:id => user.uuid, :config => { "STATUSUS_URL" => dashboard_url(user.uuid) } }
+    user = User.active.where(email: params[:heroku_id]).first_or_create!(password: 'helloworld')
+
+    feed = user.feeds.build(name: "application_#{SecureRandom.hex(2)}")
+
+    user.change_plan_to(params[:plan])
+
+    result = {id: user.uuid, config: { STATUSUS_URL: dashboard_url(user.uuid) }}
+    render :json => result
+  end
+
+  # {
+    # "plan"=>"premium",
+    # "heroku_id"=>"app7796@kensa.heroku.com",
+    #  "id"=>"123",
+    # "heroku" => {"plan"=>"premium", "heroku_id"=>"app7796@kensa.heroku.com"}}
+  def update
+    user = User.active.where(uuid: params[:id]).first!
+    user.change_plan_to(params[:plan])
+
+    result = {:message => 'You changed your plan. Thanks!', :config => { "STATUSUS_URL" => dashboard_url(user.uuid) } }
     render :json => result
   end
 
   def destroy
-    User.find_by_uuid(params[:id]).destroy
-    render :nothing => true
+    User.find_by_uuid(params[:id]).update_attribute(:active, false)
+    head :ok
+  end
+
+  def login
+    signature = Digest::SHA1.hexdigest("#{params[:id]}:#{SALT}:#{params[:timestamp]}")
+    if signature != params[:token]
+      return head :forbidden
+    end
+
+    if params[:timestamp].to_i < 2.minutes.ago.to_i
+      return head :forbidden
+    end
+
+    user = User.active.where(uuid: params[:id]).first!
+
+    session[:user] = user.id
+    session[:heroku_sso] = true
+    cookies[:'heroku-nav-data'] = params[:'nav-data']
+
+    redirect_to dashboard_url(user.uuid)
   end
 
   def heroku_authentication

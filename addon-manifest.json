@@ -5,12 +5,12 @@
     "password": "BZ2L1PUcfFp43RVx",
     "sso_salt": "b7LUzvupm7czgm5Q",
     "production": {
-      "base_url": "https://statusus.com/heroku/resources",
-      "sso_url": "https://statusus.com/sso/login"
+      "base_url": "https://statusus.io/heroku/resources",
+      "sso_url": "https://statusus.io/heroku/login"
     },
     "test": {
       "base_url": "http://localhost:3000/heroku/resources",
-      "sso_url": "http://localhost:3000/sso/login"
+      "sso_url": "http://localhost:3000/heroku/login"
     }
   }
 }

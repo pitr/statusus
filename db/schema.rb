@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130416034303) do
+ActiveRecord::Schema.define(:version => 20130505180014) do
 
   create_table "feeds", :force => true do |t|
     t.string   "name"
@@ -33,6 +33,24 @@ ActiveRecord::Schema.define(:version => 20130416034303) do
 
   add_index "messages", ["feed_id"], :name => "index_messages_on_feed_id"
 
+  create_table "plans", :force => true do |t|
+    t.string   "name"
+    t.integer  "price"
+    t.text     "description"
+    t.boolean  "active"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "plan_id"
+    t.datetime "created_at"
+  end
+
+  add_index "subscriptions", ["plan_id"], :name => "index_subscriptions_on_plan_id"
+  add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
@@ -48,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20130416034303) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "cname"
+    t.boolean  "active"
   end
 
   add_index "users", ["cname"], :name => "index_users_on_cname"

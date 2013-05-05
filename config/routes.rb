@@ -8,11 +8,13 @@ Statusus::Application.routes.draw do
   get '/pricing' => 'application#pricing'
   get '/about' => 'application#about'
 
-  get '/dashboard/:uuid' => 'feeds#dashboard', :as => :dashboard
-  get '/' => 'feeds#dashboard', :constraints => lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
+  get '/dashboard/:uuid' => 'dashboard#show', :as => :dashboard
+  get '/' => 'dashboard#show', :constraints => lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
 
   post "heroku/resources" => "heroku#create"
+  put "heroku/resources/:id" => "heroku#update"
   delete "heroku/resources/:id" => "heroku#destroy"
+  post "heroku/login" => "heroku#login"
 
   root :to => 'application#welcome'
 end

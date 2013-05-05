@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-  before_filter :authenticate_user!, :except => :dashboard
+  before_filter :authenticate_user!
 
   def index
     @feeds = current_user.feeds.includes(:messages) # TODO: remove includes
@@ -13,15 +13,5 @@ class FeedsController < ApplicationController
     else
       render action: "index"
     end
-  end
-
-  def dashboard
-    @user = if params[:uuid]
-      User.where(uuid: params[:uuid]).first
-    else
-      User.where(cname: request.host).first
-    end
-    @feeds = @user.feeds.includes(:messages) # TODO: remove includes
-    @hide_navbar = true
   end
 end
