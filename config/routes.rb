@@ -6,7 +6,6 @@ Statusus::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => :registrations }
 
   get '/pricing' => 'application#pricing'
-  get '/about' => 'application#about'
 
   get '/dashboard/:uuid' => 'dashboard#show', :as => :dashboard
   get '/' => 'dashboard#show', :constraints => lambda { |r| r.subdomain.present? && r.subdomain != 'www' }

@@ -12,29 +12,20 @@ html lang='en'
         .container
           = link_to 'Statusus', root_path, class: 'brand'
           ul.nav
-            li
-              = link_to 'Pricing', pricing_path
-            li
-              = link_to 'About Us', about_path
-          - if user_signed_in?
-            ul.nav.pull-right
-              li
-                = link_to 'My Feeds', feeds_path
-              li
-                = link_to 'Account', edit_user_registration_path
-              li
-                = link_to 'Public Dashboard', dashboard_path(current_user.uuid)
-              li
-                = link_to 'Logout', destroy_user_session_path, method: :delete
-          - else
-            ul.nav.pull-right
-              li
-                = link_to 'Login', new_user_session_path
+            li = link_to 'Pricing', pricing_path
+          ul.nav.pull-right
+            - if user_signed_in?
+              li = link_to 'My Feeds', feeds_path
+              li = link_to 'Account', edit_user_registration_path
+              li = link_to 'Public Dashboard', dashboard_path(current_user.uuid)
+              li = link_to 'Logout', destroy_user_session_path, method: :delete
+            - else
+              li = link_to 'Login', new_user_session_path
 
     - if notice
-      .alert.alert-success = notice
+      .container.alert.alert-success = notice
     - if alert
-      .alert.alert-error = alert
+      .container.alert.alert-error = alert
 
     = yield
 

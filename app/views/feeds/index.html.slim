@@ -1,7 +1,8 @@
-.container
-  .well
-    ' Your PUBLIC dashboard link is
-    = link_to dashboard_url(current_user.uuid), dashboard_url(current_user.uuid)
+- if @feeds.present?
+  .container
+    .well
+      ' Your PUBLIC dashboard link is
+      = link_to dashboard_url(current_user.uuid), dashboard_url(current_user.uuid)
 
 .container
   .row
@@ -18,8 +19,8 @@
             div.status-description
               = f.text_area :body, :rows => 3, :class => 'input-block-level', :placeholder => 'Message (e.g. We are investigating problems with DNS)'
             div.status-buttons
-              = f.button 'Escalate', :class => 'btn btn-danger', :name => 'message[resolved]', :value => false
-              = f.button 'Resolve', :class => 'btn btn-success pull-right', :name => 'message[resolved]', :value => true
+              = f.button 'Escalate', :class => 'btn btn-danger', :name => 'message[resolved]', :value => false, 'data-toggle' => 'tooltip', :title => 'Enter'
+              = f.button 'Resolve', :class => 'btn btn-success pull-right', :name => 'message[resolved]', :value => true, 'data-toggle' => 'tooltip', :title => 'Tab + Enter'
           .messages
             ol.unstyled
               - feed.messages.each do |message|
@@ -36,11 +37,12 @@
                     time.muted datetime=message.created_at.getutc.iso8601 = message.created_at
                     | )
 
-    - if @feeds.length < 3
+    - if @feeds.empty?
       .span4
-        .well.feed.center
-          = form_for Feed.new do |f|
-            h2 New Project
-            .input-append
-              = f.text_field :name, :class => 'input-small', :required => true
-              = f.submit 'Create', :class => 'btn btn-success', :disable_with => "Please wait..."
+    .span4
+      .well.feed.center
+        = form_for Feed.new do |f|
+          h2 New Project
+          .input-append
+            = f.text_field :name, class: 'input-medium', required: true, placeholder: 'name'
+            = f.submit 'Create', class: 'btn btn-success', disable_with: "Please wait..."
