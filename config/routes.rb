@@ -9,7 +9,7 @@ Statusus::Application.routes.draw do
 
   get '/dashboard/:uuid' => 'dashboard#show', :as => :dashboard
 
-  root to: 'dashboard#show', constraints: ->(request) { User.exists?(cname: request.host.gsub(/^www./, '')) }
+  get '/', to: 'dashboard#show', constraints: ->(request) { User.exists?(cname: request.host.gsub(/^www./, '')) }
 
   post    'heroku/resources'      => 'heroku#create'
   put     'heroku/resources/:id'  => 'heroku#update'

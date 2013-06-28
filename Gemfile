@@ -1,35 +1,33 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.12'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 4.0.0'
 
 ## Models
 gem 'mysql2'
-gem 'devise'
 
 ## Views
 gem 'slim'
-
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-
-  gem 'therubyracer'
-
-  gem 'uglifier', '>= 1.0.3'
-end
-
+gem 'sass-rails', '~> 4.0.0'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
+gem 'turbolinks'
 gem 'less-rails'
 
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+gem 'therubyracer', platforms: :ruby
+
+## Controller
+gem 'devise', '>= 3.0.0.rc'
+
+
 group :development do
+  gem 'byebug'
+  gem 'jazz_hands'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'bullet'
   gem 'quiet_assets'
   gem 'kensa'
 end
-
-gem 'capistrano'
-gem 'unicorn'

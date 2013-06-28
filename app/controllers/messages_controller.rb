@@ -1,9 +1,9 @@
 class MessagesController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def create
     @feed = Feed.find(params[:feed_id])
-    @message = @feed.messages.build(params[:message])
+    @message = @feed.messages.build(message_params)
 
     respond_to do |format|
       if @message.save
@@ -14,5 +14,11 @@ class MessagesController < ApplicationController
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  private
+
+  def message_params
+    params.require(:message).permit(:body, :resolved)
   end
 end

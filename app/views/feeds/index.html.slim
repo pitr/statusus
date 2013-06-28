@@ -45,4 +45,4 @@
           h2 New Project
           .input-append
             = f.text_field :name, class: 'input-medium', required: true, placeholder: 'name'
-            = f.submit 'Create', class: 'btn btn-success', disable_with: "Please wait..."
+            = f.submit 'Create', class: 'btn btn-success', data: { disable_with: 'Please wait...' }

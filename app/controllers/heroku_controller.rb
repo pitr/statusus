@@ -1,5 +1,5 @@
 class HerokuController < ApplicationController
-  before_filter :heroku_authentication, except: :login
+  before_action :heroku_authentication, except: :login
 
   SALT = 'b7LUzvupm7czgm5Q'
 
