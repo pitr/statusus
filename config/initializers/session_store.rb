@@ -1,3 +1,10 @@
-# Be sure to restart your server when you modify this file.
+if Rails.env.production?
 
-Statusus::Application.config.session_store :cookie_store, key: '_statusus_session'
+  require 'action_dispatch/middleware/session/dalli_store'
+  Statusus::Application.config.session_store :dalli_store, :namespace => 'sessions', :key => '_statusus_session', :expire_after => 20.minutes
+
+else
+
+  Statusus::Application.config.session_store :cookie_store, key: '_statusus_session'
+
+end

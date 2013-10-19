@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
 gem 'mysql2'
+gem 'dalli'
 
 ## Assets
 gem 'sass-rails', '~> 4.0.0'
@@ -22,15 +23,19 @@ gem 'turbolinks'
 ## Utilities
 gem 'bcrypt-ruby', '~> 3.0.0'
 
+gem 'byebug', group: [:development, :test]
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+
+  gem 'quiet_assets'
+end
 
 group :production do
   gem 'capistrano', '~> 2.15'
   gem 'therubyracer'
 end
 
-
 # Use unicorn as the app server
 # gem 'unicorn'
-
-# Use debugger
-gem 'byebug', group: [:development, :test]
