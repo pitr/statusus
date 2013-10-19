@@ -1,0 +1,13 @@
+login: &login
+  adapter: mysql2
+  database: statusus_development
+  username: root
+  password:
+  host: localhost
+
+development:
+  <<: *login
+
+test:
+  <<: *login
+  database: statusus_test
