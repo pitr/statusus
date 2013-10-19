@@ -23,11 +23,14 @@ gem 'turbolinks'
 gem 'bcrypt-ruby', '~> 3.0.0'
 
 
+group :production do
+  gem 'capistrano', '~> 2.15'
+  gem 'therubyracer'
+end
+
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
 # Use debugger
-# gem 'byebug', group: [:development, :test]
+gem 'byebug', group: [:development, :test]
