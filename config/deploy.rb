@@ -45,6 +45,9 @@ after 'deploy:update_code' do
   run "cd #{release_path}; RAILS_ENV=production bundle exec rake assets:precompile"
 end
 
+after "deploy:update_code", "deploy:migrate"
+
+
 # Restart Passenger
 deploy.task :restart, :roles => :app do
   # Fix Permissions
@@ -55,4 +58,12 @@ deploy.task :restart, :roles => :app do
 
   # Restart Application
   run "touch #{current_path}/tmp/restart.txt"
+end
+
+namespace :rails do
+  desc "Open the rails console on one of the remote servers"
+  task :console, :roles => :app do
+    hostname = find_servers_for_task(current_task).first
+    exec "ssh -l #{user} #{hostname} -t 'source ~/.profile && #{current_path}/bin/rails c #{rails_env}'"
+  end
 end
