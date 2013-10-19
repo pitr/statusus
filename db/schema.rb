@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131019003001) do
+ActiveRecord::Schema.define(version: 20131019165907) do
 
   create_table "users", force: true do |t|
     t.string   "username"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20131019003001) do
     t.boolean  "guest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "app_name"
   end
 
 end

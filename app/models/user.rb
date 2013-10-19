@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  validates_presence_of :username, :email, unless: :guest?
-  validates_uniqueness_of :username, allow_blank: true
+  validates_presence_of :email, :app_name, unless: :guest?
+  validates_uniqueness_of :email, allow_blank: true
 
   has_secure_password(validations: false)
   validates_confirmation_of :password, if: lambda { |m| m.password.present? }, unless: :guest?
@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   before_create { raise "Password digest missing on new record" if password_digest.blank? && !guest? }
 
   def name
-    guest ? "Guest" : username
+    guest ? "Guest" : email
   end
 
   def self.new_guest

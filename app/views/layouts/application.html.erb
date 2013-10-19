@@ -13,6 +13,8 @@
     Logged in as <strong><%= current_user.name %></strong>.
     <% if current_user.guest? %>
       <%= link_to "Become a member", signup_path %>
+    <% else %>
+      <%= link_to "Profile", edit_user_path(current_user) %>
     <% end %>
     <%= link_to "Log Out", logout_path %>
   <% else %>
