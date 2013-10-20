@@ -22,7 +22,7 @@
   </div>
   <div class="field">
     <%= f.label :subdomain %><br />
-    <%= f.text_field :subdomain %>.<%= request.domain %>
+    <%= f.text_field :subdomain %>.<%= request.host %>
   </div>
   <div class="actions"><%= f.submit "Save" %></div>
 <% end %>

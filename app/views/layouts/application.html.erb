@@ -12,7 +12,7 @@
     Logged in as <strong><%= current_user.name %></strong>.
     <%# link_to "Components", components_path %>
     <%= link_to "Manage", manage_path %>
-    <%= link_to "Public Page", root_url(subdomain: current_user.subdomain) if current_user.subdomain? %>
+    <%= link_to "Public Page", root_url(host: [current_user.subdomain, request.host].join('.')) if current_user.subdomain? %>
     <% if current_user.guest? %>
       <%= link_to "Become a member", signup_path %>
     <% else %>
