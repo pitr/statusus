@@ -1,1 +1,94 @@
-Hello
+<section id='header'>
+  <div class="row">
+    <div class="large-12 columns">
+      <h1>Server Status page</h1>
+      <h2>Easiest way to communicate with your customers in case of downtime.</h2>
+      <%= button_to "Try it for free!", users_path, method: :post, class: "button" unless current_user %>
+    </div>
+  </div>
+</section>
+
+<section id='screenshot'>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= image_tag 'macbook.png' %>
+    </div>
+  </div>
+</section>
+
+<section id='features'>
+  <div class="row">
+    <div class="large-4 columns">
+      <h3>Multi-datacenter</h3>
+      <p>We are always up, regardless of AWS and other providers</p>
+    </div>
+    <div class="large-4 columns">
+      <h3>Public Dashboard</h3>
+      <p>A nice looking dashboard for your customers</p>
+    </div>
+    <div class="large-4 columns">
+      <h3>Notifications (soon)</h3>
+      <p>Notify everyone when things go wrong. Or right!</p>
+    </div>
+  </div>
+</section>
+
+<section id='pricing'>
+  <div class="row collapse">
+    <div class="large-4 columns">
+      <ul class="pricing-table left-side">
+        <li class="title">Premium</li>
+        <li class="price">$99.99</li>
+        <li class="description">For those who care</li>
+        <li class="bullet-item"><i class="foundicon-globe"></i> Unlimited Subscribers</li>
+        <li class="bullet-item"><i class="foundicon-address-book"></i> 100 User</li>
+        <li class="bullet-item"><i class="foundicon-phone"></i> Phone Support</li>
+        <li class="cta-button">
+          <% if current_user %>
+            <a data-reveal-id="pricingModal" class="button" href="#">Buy Now</a>
+          <% else %>
+            <%= button_to "Try now", users_path, method: :post, class: "button" %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    <div class="large-4 columns recommended">
+      <ul class="pricing-table">
+        <li class="title">Plus</li>
+        <li class="price">$19.99</li>
+        <li class="description">For small business</li>
+        <li class="bullet-item"><i class="foundicon-globe"></i> Unlimited Subscribers</li>
+        <li class="bullet-item"><i class="foundicon-address-book"></i> 10 User</li>
+        <li class="bullet-item"><i class="foundicon-website"></i> Online Support</li>
+        <li class="cta-button"><a data-reveal-id="pricingModal" class="button" href="#">Buy Now</a></li>
+      </ul>
+    </div>
+    <div class="large-4 columns">
+      <ul class="pricing-table right-side">
+        <li class="title">Standard</li>
+        <li class="price">FREE</li>
+        <li class="description">Start being always in control</li>
+        <li class="bullet-item"><i class="foundicon-globe"></i> Unlimited Subscribers</li>
+        <li class="bullet-item"><i class="foundicon-address-book"></i> 1 User</li>
+        <li class="bullet-item"><i class="foundicon-website"></i> Online Support</li>
+        <li class="cta-button"><a data-reveal-id="pricingModal" class="button" href="#">Buy Now</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id='footer'>
+  <div class="row">
+    <div class="large-12 columns">
+      2013 © Statusus
+    </div>
+  </div>
+</section>
+
+
+<div id="pricingModal" class="reveal-modal small">
+  <h2>Awesome.</h2>
+  <p class="lead">But we haven't officially launched yet.</p>
+  <p>Please sign up with your email. We'll let you know as soon as these plans become available.</p>
+  <a class="close-reveal-modal">&#215;</a>
+</div>

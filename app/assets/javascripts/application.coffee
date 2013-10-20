@@ -1,8 +1,11 @@
+#= require jquery
+#= require foundation
 #= require angular
 #= require angular-touch
 #= require angularjs/rails/resource
 #= require_self
 
+$ -> $(document).foundation()
 
 angular.module('statusus', ['ngTouch', 'rails'])
 

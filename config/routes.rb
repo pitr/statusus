@@ -16,4 +16,6 @@ Statusus::Application.routes.draw do
 
   root 'application#landing'
   get 'manage', to: 'application#manage'
+
+  get 'status/*', to: 'application#public_page'
 end

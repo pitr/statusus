@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
 gem 'mysql2'
 gem 'dalli'
+
 
 ## Assets
 gem 'sass-rails', '~> 4.0.0'
@@ -14,20 +14,17 @@ gem 'jquery-rails'
 gem 'quiet_assets'
 gem 'rails-timeago', '~> 2.0'
 
+gem 'zurb-foundation'
+
 gem 'turbolinks'
 
 gem 'angularjs-rails', '>= 1.2.0.rc2'
 gem 'angularjs-rails-resource', '~> 0.2.3'
 
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
-
-
 ## Utilities
+gem 'jbuilder', '~> 1.2'
 gem 'bcrypt-ruby', '~> 3.0.0'
-
-gem 'byebug', group: [:development, :test]
 
 group :development do
   gem 'better_errors'
@@ -38,10 +35,9 @@ group :development do
   gem 'pry-rails', '>= 0.3.2'
 end
 
+gem 'byebug', group: [:development, :test]
+
 group :production do
   gem 'capistrano', '~> 2.15'
   gem 'therubyracer'
 end
-
-# Use unicorn as the app server
-# gem 'unicorn'

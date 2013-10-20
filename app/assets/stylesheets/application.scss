@@ -1,0 +1,84 @@
+//= require_self
+//= require foundation_and_overrides
+
+.ng-cloak, {
+  display: none !important;
+}
+
+#rumble2013 {
+  bottom: 0;
+  top: inherit !important;
+}
+
+
+ul.pricing-table { margin-bottom: 0;
+  .price { background: #f8f8f8;  }
+  i { display: inline-block; margin-right: 5px; }
+}
+
+.recommended { box-shadow: 0 0 10px rgba(0,0,0,0.25); position: relative; z-index: 2; }
+@media only screen and (min-width: 768px){
+  .left-side { border-right: none; }
+  .right-side { border-left: none; }
+}
+
+.landing > section {
+  padding: 70px 0;
+}
+
+.landing {
+
+  #header {
+    background-color: #fcb040;
+
+    h1, h2 {
+      color: white;
+      font-weight: normal;
+      text-shadow: 0px 1px 1px rgba(0,0,0,0.2);
+    }
+  }
+
+  #screenshot img {
+    text-align: center;
+  }
+
+  #features {
+    background-color: #f2f2f2;
+  }
+
+  #footer {
+    background-color: #fcb040;
+    color: white !important;
+  }
+}
+
+
+
+@font-face {
+  font-family: '[set]Foundicons';
+  src: url('//cdnjs.cloudflare.com/ajax/libs/foundicons/2.0/fonts/general_foundicons.eot');
+  src: url('//cdnjs.cloudflare.com/ajax/libs/foundicons/2.0/fonts/general_foundicons.eot?#iefix') format('embedded-opentype'),
+       url('//cdnjs.cloudflare.com/ajax/libs/foundicons/2.0/fonts/general_foundicons.woff') format('woff'),
+       url('//cdnjs.cloudflare.com/ajax/libs/foundicons/2.0/fonts/general_foundicons.ttf') format('truetype'),
+       url('//cdnjs.cloudflare.com/ajax/libs/foundicons/2.0/fonts/general_foundicons.svg#[set]Foundicons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class*="foundicon-"] {
+  display: inline;
+  width: auto;
+  height: auto;
+  line-height: inherit;
+  vertical-align: baseline;
+  background-image: none;
+  background-position: 0 0;
+  background-repeat: repeat;
+}
+
+[class*="foundicon-"]:before {
+  font-family: "[set]Foundicons";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+}

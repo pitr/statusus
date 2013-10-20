@@ -1,36 +1,91 @@
 <!DOCTYPE html>
-<html ng-app='statusus'>
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Statusus</title>
   <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/foundicons/2.0/stylesheets/general_foundicons.min.css' %>
+  <%= javascript_include_tag "vendor/custom.modernizr" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body ng-app='statusus' class='<%= params[:action] %>'>
 
-<div id="user_header">
-  <% if current_user %>
-    Logged in as <strong><%= current_user.name %></strong>.
-    <%# link_to "Components", components_path %>
-    <%= link_to "Manage", manage_path %>
-    <%= link_to "Public Page", root_url(host: [current_user.subdomain, request.host].join('.')) if current_user.subdomain? %>
-    <% if current_user.guest? %>
-      <%= link_to "Become a member", signup_path %>
-    <% else %>
-      <%= link_to "Profile", edit_user_path(current_user) %>
-    <% end %>
-    <%= link_to "Log Out", logout_path %>
-  <% else %>
-    <%= link_to "Log In", login_path %>
-    <p><%= button_to "Try it for free!", users_path, method: :post %></p>
+  <nav class="top-bar">
+    <ul class="title-area">
+      <li class="name">
+        <h1>
+          <%= link_to "Statusus", root_path %>
+        </h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+      <% if current_user %>
+        <ul class="left">
+          <li class="divider"></li>
+          <li><%= link_to "Incidents", manage_path %></li>
+        </ul>
+      <% end %>
+      <ul class="right">
+        <% if current_user %>
+          <% if current_user.subdomain? %>
+            <li class="divider"></li>
+            <li><%= link_to "Public Page", root_url(host: [current_user.subdomain, request.host].join('.')) %></li>
+          <% end %>
+          <li class="divider"></li>
+          <li>
+            <%= link_to edit_user_path(current_user) do %>
+              Logged in as <strong><%= current_user.name %></strong>
+            <% end %>
+          </li>
+          <% if current_user.guest? %>
+            <li class="divider"></li>
+            <li><%= link_to "Become a member", signup_path %></li>
+          <% else %>
+            <li class="divider"></li>
+            <li><%= link_to "Profile", edit_user_path(current_user) %></li>
+          <% end %>
+          <li class="divider"></li>
+          <li><%= link_to "Log Out", logout_path %></li>
+        <% else %>
+          <li class="divider"></li>
+          <li><%= button_to "Try it for free!", users_path, method: :post, class: "button radius" %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Log In", login_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+
+  <% if flash[:notice] %>
+    <div data-alert class="alert-box success">
+      <%= flash[:notice] %>
+      <a href="" class="close">&times;</a>
+    </div>
   <% end %>
-</div>
+  <% if flash[:alert] %>
+    <div data-alert class="alert-box alert">
+      <%= flash[:alert] %>
+      <a href="" class="close">&times;</a>
+    </div>
+  <% end %>
 
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, id: "flash_#{name}" %>
-<% end %>
+  <% if @custom_html %>
+    <%= yield %>
+  <% else %>
+    <div class="row">
+      <div class="large-12 columns">
+        <%= yield %>
+      </div>
+    </div>
+  <% end %>
 
-<%= yield %>
-
+  <%= javascript_include_tag "application" %>
+  <script src="http://s0.railsrumble.com/banner.js" type="text/javascript"></script>
 </body>
-<%= javascript_include_tag "application" %>
 </html>

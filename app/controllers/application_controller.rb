@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :authorize, only: :manage
 
   def landing
+    @custom_html = true
   end
 
   def manage
