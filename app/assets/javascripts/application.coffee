@@ -21,9 +21,16 @@ angular.module('statusus', ['ngTouch', 'rails'])
     Message.query().then (messages) ->
       $scope.messages = messages
     $scope.message = newMessage()
+
     $scope.createNewMessage = ->
       message = new Message(message: $scope.message)
       $scope.messages.unshift message
       $scope.message = newMessage()
-      message.create()
+      message.create().then (saved_message) ->
+        message.id = saved_message.id
+    $scope.deleteMessage = (message) ->
+      ix = $scope.messages.indexOf(message)
+      $scope.messages.splice(ix, 1)
+
+      message.delete()
   ])

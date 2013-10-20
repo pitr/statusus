@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20131020004141) do
 
   create_table "messages", force: true do |t|
     t.integer  "user_id"
-    t.string   "message"
+    t.string   "text"
     t.integer  "status",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"

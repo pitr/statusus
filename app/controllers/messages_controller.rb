@@ -18,12 +18,9 @@ class MessagesController < ApplicationController
   def create
     @message = current_user.messages.build(message_params)
 
-    if @message.save
-      # redirect_to @message, notice: 'Message was successfully created.'
-      render json: @message
-    else
-      render action: 'new'
-    end
+    @message.save
+
+    render 'show'
   end
 
   # PATCH/PUT /messages/1
@@ -46,8 +43,7 @@ class MessagesController < ApplicationController
       @message = current_user.messages.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def message_params
-      params.require(:message).permit(:message, :status)
+      params.require(:message).permit(:text, :status)
     end
 end

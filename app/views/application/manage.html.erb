@@ -1,7 +1,7 @@
 <div ng-controller='MainCtrl' class='ng-cloak'>
 
   <form name="newMessage" ng-submit="createNewMessage()">
-    <input type="text" ng-model="message.message" size="30" placeholder="new status">
+    <input type="text" ng-model="message.text" size="30" placeholder="new status" required>
     <label>
       <input type="radio" ng-model="message.status" value="0"> Operational
     </label>
@@ -17,7 +17,8 @@
 
   <ul>
     <li ng-repeat='message in messages' ng-class='{good:message.status==0,warn:message.status==1,bad:message.status==2}'>
-      {{message.message}}
+      {{message.text}}
+      <button ng-if='message.id' ng-click='deleteMessage(message)'>delete</button>
     </li>
   </ul>
 </div>

@@ -1,4 +1,3 @@
 json.array!(@messages) { |message|
-  json.status message.status
-  json.message message.message
+  json.partial! 'messages/message', message: message
 }
