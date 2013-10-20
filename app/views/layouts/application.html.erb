@@ -11,6 +11,7 @@
 <div id="user_header">
   <% if current_user %>
     Logged in as <strong><%= current_user.name %></strong>.
+    <%= link_to "Components", components_path %>
     <% if current_user.guest? %>
       <%= link_to "Become a member", signup_path %>
     <% else %>

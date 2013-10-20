@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   validates_presence_of     :password_confirmation, if: lambda { |m| m.password.present? }, unless: :guest?
   before_create { raise "Password digest missing on new record" if password_digest.blank? && !guest? }
 
+  has_many :components
+
   def name
     guest ? "Guest" : email
   end
