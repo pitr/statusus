@@ -5,7 +5,9 @@
 #= require angularjs/rails/resource
 #= require_self
 
-$ -> $(document).foundation()
+$ ->
+  $(document).foundation()
+  $('input').first().focus()
 
 angular.module('statusus', ['ngTouch', 'rails'])
 
@@ -29,6 +31,7 @@ angular.module('statusus', ['ngTouch', 'rails'])
       message = new Message(message: $scope.message)
       $scope.messages.unshift message
       $scope.message = newMessage()
+      $('input').first().focus()
       message.create().then (saved_message) ->
         message.id = saved_message.id
     $scope.deleteMessage = (message) ->
