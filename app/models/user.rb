@@ -19,6 +19,12 @@ class User < ActiveRecord::Base
   end
 
   def move_to(user)
-    # tasks.update_all(user_id: user.id)
+    components.update_all(user_id: user.id)
+  end
+
+  def populate_with_examples
+    components.create(name: 'API')
+    components.create(name: 'Admin')
+    components.create(name: 'Notifications')
   end
 end

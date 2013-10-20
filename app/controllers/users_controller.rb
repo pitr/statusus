@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user = params[:user] ? User.new(user_params) : User.new_guest
 
     if @user.save
+      @user.populate_with_examples
       current_user.move_to(@user) if current_user && current_user.guest?
       session[:user_id] = @user.id
       redirect_to root_url, notice: "Thank you for signing up!"
