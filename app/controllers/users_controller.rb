@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+
   def new
     @user = User.new(app_name: 'My App')
   end
@@ -16,13 +18,21 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-    @user = current_user
+  def update
+    if @user.update(user_params)
+      redirect_to edit_user_path(@user), notice: 'User was successfully updated.'
+    else
+      render action: 'edit'
+    end
   end
 
   private
 
+  def set_user
+    @user = current_user
+  end
+
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation, :app_name)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :app_name, :subdomain)
   end
 end

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title><%= @user.app_name %> Status</title>
+  <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
+  <%= stylesheet_link_tag "public", media: "all" %>
+  <%= javascript_include_tag "public" %>
+  <link href='/images/status-icon-green.png' rel='icon' type='image/png'>
+</head>
+
+<body class="">
+  <div class="wrap" id="header">
+    <h1 class="logo"><a href="/"><img src="<%= image_path 'logo.png' %>"></a></h1>
+
+    <h2 id="last_updated">
+      Updated <%= timeago_tag Time.now %>
+    </h2>
+  </div>
+
+  <div class="wrap" id="message-list">
+    <div class="loader"><img src="<%= image_path 'spinner.gif' %>"></div>
+
+    <div class="messages-header">
+      <h1>Status Messages</h1>
+    </div>
+
+    <%= cache [@user, 'v1'] do %>
+      <% @user.messages_for_public_page.each do |date, messages| %>
+
+        <div class="message_group">
+          <h3>
+            <% if date.today? %>
+              Today
+            <% elsif date.tomorrow.today? %>
+              Yesterday, <%= date.to_formatted_s(:long) %>
+            <% else %>
+              <%= date.to_formatted_s(:long) %>
+            <% end %>
+          </h3>
+
+          <% messages.each do |message| %>
+            <div class="message <%= class_for_status(message.status) %>">
+              <span class="time"><%= message.created_at.utc.to_s(:time) %> UTC</span> <span class="title"><%= message.text %></span>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="wrap" id="footer">
+    <div id="legal">
+      <ul>
+        <li>
+          Powered by <%= link_to 'Statusus', root_url %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

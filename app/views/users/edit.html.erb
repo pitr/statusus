@@ -20,5 +20,9 @@
     <%= f.label :app_name %><br />
     <%= f.text_field :app_name %>
   </div>
+  <div class="field">
+    <%= f.label :subdomain %><br />
+    <%= f.text_field :subdomain %>.<%= request.domain %>
+  </div>
   <div class="actions"><%= f.submit "Save" %></div>
 <% end %>

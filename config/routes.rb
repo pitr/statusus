@@ -12,7 +12,8 @@ Statusus::Application.routes.draw do
 
   resources :messages, defaults: {format: :json}
 
+  get '', to: 'application#public_page', constraints: lambda { |r| r.subdomain.present? && !%w[www statusus].include?(r.subdomain) }
+
   root 'application#landing'
   get 'manage', to: 'application#manage'
-
 end

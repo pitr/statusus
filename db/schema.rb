@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131020004141) do
+ActiveRecord::Schema.define(version: 20131020023539) do
 
   create_table "components", force: true do |t|
     t.integer  "user_id"
@@ -41,6 +41,9 @@ ActiveRecord::Schema.define(version: 20131020004141) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "app_name"
+    t.string   "subdomain"
   end
+
+  add_index "users", ["subdomain"], name: "index_users_on_subdomain", unique: true, using: :btree
 
 end

@@ -5,9 +5,14 @@ class Message < ActiveRecord::Base
     'Major Outage' => 2
   }.freeze
 
-  belongs_to :user
+  belongs_to :user, touch: true
 
   validates_presence_of :text
 
   scope :in_order, -> { order("created_at DESC") }
+  scope :for_a_week, -> { where(:created_at => (7.days.ago.beginning_of_day..0.days.ago.end_of_day)) }
+
+  def by_day
+    created_at.to_date
+  end
 end

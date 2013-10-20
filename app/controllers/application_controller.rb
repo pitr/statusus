@@ -11,6 +11,17 @@ class ApplicationController < ActionController::Base
   def manage
   end
 
+  def public_page
+    subdomain = request.subdomain.split('.').first
+    @user = User.find_by_subdomain(subdomain)
+
+    if @user
+      render layout: false
+    else
+      redirect_to root_url(subdomain: request.subdomain.split('.')[1..-1].join('.'))
+    end
+  end
+
 private
 
   def current_user

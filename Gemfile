@@ -12,6 +12,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'quiet_assets'
+gem 'rails-timeago', '~> 2.0'
+
+gem 'turbolinks'
 
 gem 'angularjs-rails', '>= 1.2.0.rc2'
 gem 'angularjs-rails-resource', '~> 0.2.3'
