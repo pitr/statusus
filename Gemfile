@@ -13,11 +13,12 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'quiet_assets'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'angularjs-rails', '>= 1.2.0.rc2'
+gem 'angularjs-rails-resource', '~> 0.2.3'
+
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 1.2'
 
 
 ## Utilities
@@ -30,6 +31,8 @@ group :development do
   gem 'binding_of_caller'
 
   gem 'quiet_assets'
+
+  gem 'pry-rails', '>= 0.3.2'
 end
 
 group :production do

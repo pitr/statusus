@@ -1,0 +1,23 @@
+<div ng-controller='MainCtrl' class='ng-cloak'>
+
+  <form name="newMessage" ng-submit="createNewMessage()">
+    <input type="text" ng-model="message.message" size="30" placeholder="new status">
+    <label>
+      <input type="radio" ng-model="message.status" value="0"> Operational
+    </label>
+    <label>
+      <input type="radio" ng-model="message.status" value="1"> Partial Outage
+    </label>
+    <label>
+      <input type="radio" ng-model="message.status" value="2"> Major Outage
+    </label>
+    <input type="submit" id="submit" value="Submit" />
+  </form>
+
+
+  <ul>
+    <li ng-repeat='message in messages' ng-class='{good:message.status==0,warn:message.status==1,bad:message.status==2}'>
+      {{message.message}}
+    </li>
+  </ul>
+</div>

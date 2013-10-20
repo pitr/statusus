@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       @user.populate_with_examples
       current_user.move_to(@user) if current_user && current_user.guest?
       session[:user_id] = @user.id
-      redirect_to root_url, notice: "Thank you for signing up!"
+      redirect_to manage_url, notice: "Thank you for signing up!"
     else
       render "new"
     end

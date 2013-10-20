@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   before_create { raise "Password digest missing on new record" if password_digest.blank? && !guest? }
 
   has_many :components
+  has_many :messages
 
   def name
     guest ? "Guest" : email
@@ -19,12 +20,12 @@ class User < ActiveRecord::Base
   end
 
   def move_to(user)
-    components.update_all(user_id: user.id)
+    # components.update_all(user_id: user.id)
   end
 
   def populate_with_examples
-    components.create(name: 'API')
-    components.create(name: 'Admin')
-    components.create(name: 'Notifications')
+    # components.create(name: 'API')
+    # components.create(name: 'Admin')
+    # components.create(name: 'Notifications')
   end
 end
