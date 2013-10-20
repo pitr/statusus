@@ -13,14 +13,23 @@ class ApplicationController < ActionController::Base
   end
 
   def public_page
-    subdomain = request.subdomain.split('.').first
-    @user = User.find_by_subdomain(subdomain)
+    if params[:page]
+      @user = User.find_by_subdomain(params[:page])
 
-    if @user
-      render layout: false
+      unless @user
+        redirect_to root_url
+        return
+      end
     else
-      redirect_to root_url(subdomain: request.subdomain.split('.')[1..-1].join('.'))
+      subdomain = request.subdomain.split('.').first
+      @user = User.find_by_subdomain(subdomain)
+      unless @user
+        redirect_to root_url(subdomain: request.subdomain.split('.')[1..-1].join('.'))
+        return
+      end
     end
+
+    render layout: false
   end
 
 private
