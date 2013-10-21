@@ -35,7 +35,7 @@
         <% if current_user %>
           <% if current_user.subdomain? %>
             <li class="divider"></li>
-            <li><%= link_to "Public Page", root_url(host: [current_user.subdomain, request.host].join('.')) %></li>
+            <li><%= link_to "Public Page", status_path(page: current_user.subdomain) %></li>
           <% end %>
           <li class="divider"></li>
           <li>
