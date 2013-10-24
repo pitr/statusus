@@ -7,7 +7,7 @@
 
 $ ->
   $(document).foundation()
-  $('input').first().focus()
+  $('input[type=text]').first().focus()
 
 angular.module('statusus', ['ngTouch', 'rails'])
 
