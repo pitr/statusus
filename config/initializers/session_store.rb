@@ -1,7 +1,7 @@
 if Rails.env.production?
 
   require 'action_dispatch/middleware/session/dalli_store'
-  Statusus::Application.config.session_store :dalli_store, :namespace => 'sessions', :key => '_statusus_session', :expire_after => 20.minutes
+  Statusus::Application.config.session_store :dalli_store, :namespace => 'sessions', :key => '_statusus_session', :expire_after => 60.minutes
 
 else
 
