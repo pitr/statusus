@@ -2,27 +2,35 @@
 
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <div class="row collapse">
+        <h2>Form is invalid</h2>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
+    <div class="row collapse">
+      <%= f.label :email %>
+      <div class="small-12 columns"><%= f.text_field :email %></div>
+    </div>
+    <div class="row collapse">
+      <%= f.label :app_name %>
+      <div class="small-12 columns"><%= f.text_field :app_name %></div>
+    </div>
+    <div class="row collapse">
+      <%= f.label :subdomain %>
+      <div class="small-9 columns">
+        <%= f.text_field :subdomain %>
+      </div>
+      <div class="small-3 columns">
+        <span class="postfix">.<%= request.host %></span>
+      </div>
+    </div>
+    <div class='row collapse'>
+      <%= f.submit "Save", class: 'button' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :app_name %><br />
-    <%= f.text_field :app_name %>
-  </div>
-  <div class="field">
-    <%= f.label :subdomain %><br />
-    <%= f.text_field :subdomain %>.<%= request.host %>
-  </div>
-  <div class="actions"><%= f.submit "Save" %></div>
 <% end %>
