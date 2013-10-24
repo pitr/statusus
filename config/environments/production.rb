@@ -79,6 +79,4 @@ Statusus::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.cache_store = :dalli_store
-  config.assets.js_compressor = Uglifier.new(mangle: false) if defined? Uglifier
-
 end
