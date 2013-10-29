@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
   end
 
   def public_page
-    subdomain = request.subdomain.split('.').first
     @user = User.find_by_subdomain(subdomain)
+
     if @user
       render layout: false
     else
@@ -22,7 +22,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def feed
+    @user = User.find_by_subdomain!(subdomain)
+
+    respond_to do |format|
+      format.rss
+      format.atom
+    end
+  end
+
 private
+
+  def subdomain
+    request.subdomain.split('.').first
+  end
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]

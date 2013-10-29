@@ -15,4 +15,8 @@ class Message < ActiveRecord::Base
   def by_day
     created_at.to_date
   end
+
+  def guid
+    Digest::SHA1.hexdigest("Message:#{id}")
+  end
 end

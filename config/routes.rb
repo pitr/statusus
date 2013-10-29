@@ -12,7 +12,10 @@ Statusus::Application.routes.draw do
 
   resources :messages, defaults: {format: :json}
 
-  get '', to: 'application#public_page', constraints: lambda { |r| r.subdomain.present? && !%w[www statusus].include?(r.subdomain.split('.').first) }
+  Rails.logger.info method(:resources).source_location
+  subdomain_constraint = lambda { |r| r.subdomain.present? && !%w[www statusus].include?(r.subdomain.split('.').first) }
+  get '', to: 'application#public_page', constraints: subdomain_constraint
+  get 'feed', to: 'application#feed', constraints: subdomain_constraint
 
   root 'application#landing'
   get 'manage', to: 'application#manage'

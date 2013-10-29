@@ -3,7 +3,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-
+  <link rel="alternate" type="application/rss+xml" title="<%= @user.app_name %> Status" href="<%= feed_url(format: :rss) %>" />
   <title><%= @user.app_name %> Status</title>
   <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
   <%= stylesheet_link_tag "public", media: "all" %>
