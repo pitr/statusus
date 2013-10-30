@@ -17,6 +17,10 @@
       <div class="small-12 columns"><%= f.text_field :email %></div>
     </div>
     <div class="row collapse">
+      <%= f.label :access_token %>
+      <div class="small-12 columns"><%= f.text_field :access_token, disabled: true %></div>
+    </div>
+    <div class="row collapse">
       <%= f.label :app_name %>
       <div class="small-12 columns"><%= f.text_field :app_name %></div>
     </div>

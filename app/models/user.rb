@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   validates_presence_of     :password_confirmation, if: lambda { |m| m.password.present? }, unless: :guest?
   before_create { raise "Password digest missing on new record" if password_digest.blank? && !guest? }
 
+  before_create :generate_access_token
+
   has_many :components
   has_many :messages
 
@@ -37,5 +39,11 @@ class User < ActiveRecord::Base
       public_messages[time.to_date] ||= [Message.new(text: "All is full of love", status: 0, created_at:time.end_of_day)]
     end
     public_messages
+  end
+
+  def generate_access_token
+    begin
+      self.access_token = SecureRandom.hex
+    end while self.class.exists?(access_token: access_token)
   end
 end

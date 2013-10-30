@@ -1,6 +1,10 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
+  before_action :restrict_api, only: :create
+
+  protect_from_forgery with: :null_session, only: :create, if: :current_user
+
   before_action :authorize
 
   respond_to :json
@@ -45,5 +49,12 @@ class MessagesController < ApplicationController
 
     def message_params
       params.require(:message).permit(:text, :status)
+    end
+
+    def restrict_api
+      return unless request.authorization
+      authenticate_or_request_with_http_token do |token, options|
+        @current_user = User.find_by_access_token(token)
+      end
     end
 end
