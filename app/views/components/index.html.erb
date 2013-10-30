@@ -1,27 +1,19 @@
 <h1>Components</h1>
 
-<%= link_to 'New Component', new_component_path %>
+<%= link_to 'New Component', new_component_path, class: 'button small' %>
 
-<br>
+<% @components.each do |component| %>
+  <h2>
+    <%= component.name %>
+    <small>
+      <%= link_to 'Edit', edit_component_path(component) %>
+    </small>
+  </h2>
 
-<table>
-  <tbody>
-    <% @components.each do |component| %>
-      <tr>
-        <td>
-          <%= component.name %>
-          <%= link_to 'Edit', edit_component_path(component) %>
-          <%= link_to 'Destroy', component, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
-        <% Component::STATUSES.each do |name, code| %>
-          <td>
-            <label>
-              <%= radio_button_tag "component_#{component.id}", code, component.status == code, class: 'component_status', 'data-component-id' => component.id %>
-              <span><%= name %></span>
-            </label>
-          </td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <% Component::STATUSES.each do |name, code| %>
+    <label>
+      <%= radio_button_tag "component_#{component.id}", code, component.status == code, class: 'component_status', 'data-component-id' => component.id %>
+      <span><%= name %></span>
+    </label>
+  <% end %>
+<% end %>

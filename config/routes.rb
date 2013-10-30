@@ -6,9 +6,9 @@ Statusus::Application.routes.draw do
 
   resources :users
   resources :sessions
-  # resources :components, except: :show do
-  #   post :status, on: :member
-  # end
+  resources :components, except: :show do
+    post :status, on: :member
+  end
 
   resources :messages, defaults: {format: :json}
 

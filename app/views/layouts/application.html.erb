@@ -28,6 +28,8 @@
       <% if current_user %>
         <ul class="left">
           <li class="divider"></li>
+          <li><%= link_to "Components", components_path %></li>
+          <li class="divider"></li>
           <li><%= link_to "Incidents", manage_path %></li>
         </ul>
       <% end %>
