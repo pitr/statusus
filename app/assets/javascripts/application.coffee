@@ -11,9 +11,10 @@ $ ->
 
 angular.module('statusus', ['ngTouch', 'rails'])
 
-  .config ($httpProvider) ->
+  .config(['$httpProvider', ($httpProvider) ->
     token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = token
+  ])
 
   .factory('Message', ['railsResourceFactory', (railsResourceFactory) ->
     railsResourceFactory(url: '/messages', name: 'message')
