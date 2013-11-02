@@ -11,6 +11,7 @@ set :use_sudo, false
 set :scm, "git"
 set :repository, "git@github.com:pitr/#{application}.git"
 set :branch, "master"
+set :default_shell, "/bin/bash -l"
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
