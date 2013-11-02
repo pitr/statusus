@@ -8,6 +8,9 @@ login: &login
 development:
   <<: *login
 
+production:
+  <<: *login
+
 test:
   <<: *login
   database: statusus_test
