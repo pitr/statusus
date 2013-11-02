@@ -40,4 +40,5 @@ gem 'byebug', group: [:development, :test]
 group :production do
   gem 'capistrano', '~> 2.15'
   gem 'therubyracer'
+  gem 'unicorn'
 end

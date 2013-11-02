@@ -1,0 +1,9 @@
+login: &login
+  adapter: mysql2
+  username: statusus
+  password: statu5u5
+  host: localhost
+
+production:
+  <<: *login
+  database: statusus_production
