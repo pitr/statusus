@@ -25,6 +25,7 @@ gem 'angularjs-rails-resource', '~> 0.2.3'
 ## Utilities
 gem 'jbuilder', '~> 1.2'
 gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'newrelic_rpm'
 
 group :development do
   gem 'better_errors'
