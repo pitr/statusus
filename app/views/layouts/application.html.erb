@@ -41,7 +41,7 @@
           <% end %>
           <li class="divider"></li>
           <li>
-            <%= link_to edit_user_path(current_user) do %>
+            <%= link_to edit_user_path do %>
               Logged in as <strong><%= current_user.name %></strong>
             <% end %>
           </li>
@@ -50,13 +50,13 @@
             <li><%= link_to "Become a member", signup_path %></li>
           <% else %>
             <li class="divider"></li>
-            <li><%= link_to "Profile", edit_user_path(current_user) %></li>
+            <li><%= link_to "Profile", edit_user_path %></li>
           <% end %>
           <li class="divider"></li>
           <li><%= link_to "Log Out", logout_path %></li>
         <% else %>
           <li class="divider"></li>
-          <li><%= button_to "Try it for free!", users_path, method: :post, class: "button radius" %></li>
+          <li><%= button_to "Try it for free!", user_path, method: :post, class: "button radius" %></li>
           <li class="divider"></li>
           <li><%= link_to "Log In", login_path %></li>
         <% end %>

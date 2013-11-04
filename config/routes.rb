@@ -4,7 +4,7 @@ Statusus::Application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
-  resources :users
+  resource :user
   resources :sessions
   resources :components, except: :show do
     post :status, on: :member

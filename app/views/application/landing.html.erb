@@ -3,7 +3,7 @@
     <div class="large-12 columns">
       <h1>Server Status page</h1>
       <h2>Easiest way to communicate with your customers in case of downtime.</h2>
-      <%= button_to "Try it for free!", users_path, method: :post, class: "button" unless current_user %>
+      <%= button_to "Try it for free!", user_path, method: :post, class: "button" unless current_user %>
     </div>
   </div>
 </section>
@@ -47,7 +47,7 @@
           <% if current_user %>
             <a data-reveal-id="pricingModal" class="button" href="#">Buy Now</a>
           <% else %>
-            <%= button_to "Try now", users_path, method: :post, class: "button" %>
+            <%= button_to "Try now", user_path, method: :post, class: "button" %>
           <% end %>
         </li>
       </ul>
