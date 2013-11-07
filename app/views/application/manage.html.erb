@@ -13,11 +13,11 @@
     <label>
       <input type="radio" ng-model="message.status" value="2"> Major Outage
     </label>
-    <input class='button tiny' type="submit" id="submit" value="Submit" />
+    <input class='button tiny' analytics-on type="submit" id="submit" value="Create Incident" />
   </form>
 
   <div ng-repeat='message in messages' ng-class='{good:message.status==0,warn:message.status==1,bad:message.status==2}'>
     <span class='message-time'>{{ message.createdAt }}</span> {{message.text}}
-    <button ng-if='message.id' ng-click='deleteMessage(message)' class='button tiny alert round'>delete</button>
+    <button ng-if='message.id' analytics-on ng-click='deleteMessage(message)' class='button tiny alert round'>delete</button>
   </div>
 </div>

@@ -3,13 +3,17 @@
 #= require angular
 #= require angular-touch
 #= require angularjs/rails/resource
+#= require angulartics
+#= require angulartics-google-analytics
+#= require angularjs/rails/resource
+
 #= require_self
 
 $ ->
   $(document).foundation()
   $('input[type=text]').first().focus()
 
-angular.module('statusus', ['ngTouch', 'rails'])
+angular.module('statusus', ['ngTouch', 'rails', 'angulartics', 'angulartics.google.analytics'])
 
   .config(['$httpProvider', ($httpProvider) ->
     token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
